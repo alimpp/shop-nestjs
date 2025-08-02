@@ -16,9 +16,5 @@ export class CreateDto {
   avatarUrl: string;
 
   @IsString()
-  bio: string;
-
-  @IsString()
-  @Length(8, 16)
-  password: string;
+  phone: string;
 }

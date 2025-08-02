@@ -10,7 +10,13 @@ import { UsersModule } from './users/users.module';
 import { OtpModule } from './otp/otp.module';
 
 @Module({
-  imports: [UsersModule, AuthModule, FileModule, TypeOrmModule.forRoot(pgConfig), OtpModule],
+  imports: [
+    UsersModule,
+    AuthModule,
+    FileModule,
+    TypeOrmModule.forRoot(pgConfig),
+    OtpModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

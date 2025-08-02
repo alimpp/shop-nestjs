@@ -14,9 +14,17 @@ import { LocalAuthGuard } from './guards/local-auth/local-auth.guard';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Post('register')
-  register(@Body() phone: string) {
-    return this.authService.register(phone);
+  @Post('request-otp')
+  async requestOtp(@Body('phoneNumber') phoneNumber: string) {
+    return this.authService.requestOtp(phoneNumber);
+  }
+
+  @Post('verify-otp')
+  async verifyOtp(
+    @Body('phoneNumber') phoneNumber: string,
+    @Body('otp') otp: string,
+  ) {
+    return this.authService.verifyOtp(phoneNumber, otp);
   }
 
   @HttpCode(HttpStatus.OK)

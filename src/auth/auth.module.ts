@@ -9,14 +9,23 @@ import { JwtModule } from '@nestjs/jwt';
 import jwtConfig from './config/jwt.config';
 import { ConfigModule } from '@nestjs/config';
 import { JwtStrategy } from './strategies/jwt.strategy';
+import { OtpService } from 'src/otp/otp.service';
+import { CacheModule } from '@nestjs/cache-manager';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([UserEntity]),
     JwtModule.registerAsync(jwtConfig.asProvider()),
     ConfigModule.forFeature(jwtConfig),
+    CacheModule.register(),
   ],
   controllers: [AuthController],
-  providers: [AuthService, UsersService, LocalStrategy, JwtStrategy],
+  providers: [
+    AuthService,
+    UsersService,
+    OtpService,
+    LocalStrategy,
+    JwtStrategy,
+  ],
 })
 export class AuthModule {}

@@ -1,6 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
+import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Cache } from 'cache-manager';
-import { CACHE_MANAGER, Inject } from '@nestjs/common';
 import * as speakeasy from 'speakeasy';
 
 @Injectable()
@@ -13,27 +13,20 @@ export class OtpService {
       secret: secret.base32,
       encoding: 'base32',
     });
-
-    // Store the secret in cache with phone number as key
-    await this.cacheManager.set(phoneNumber, secret.base32, { ttl: 300 }); // 5 minutes expiry
-
+    await this.cacheManager.set(phoneNumber, secret.base32, 300000);
     return token;
   }
 
   async verifyOtp(phoneNumber: string, token: string): Promise<boolean> {
     const secret = await this.cacheManager.get<string>(phoneNumber);
     if (!secret) return false;
-
     const verified = speakeasy.totp.verify({
       secret,
       encoding: 'base32',
       token,
-      window: 1, // Allow 1 step (30 seconds) before/after current time
+      window: 1,
     });
-
-    // Remove OTP from cache after verification (whether successful or not)
     await this.cacheManager.del(phoneNumber);
-
     return verified;
   }
 }
