@@ -9,6 +9,7 @@ import { FileModule } from './file/file.module';
 import { UsersModule } from './users/users.module';
 import { OtpModule } from './otp/otp.module';
 import { AdminModule } from './admin/admin.module';
+import { AddressModule } from './address/address.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { AdminModule } from './admin/admin.module';
     TypeOrmModule.forRoot(pgConfig),
     OtpModule,
     AdminModule,
+    AddressModule,
   ],
   controllers: [AppController],
   providers: [AppService],
