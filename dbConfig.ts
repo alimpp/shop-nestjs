@@ -1,4 +1,6 @@
 import { UserEntity } from 'src/entities/user.entity';
+import { AdminEntity } from 'src/entities/admin.entity';
+
 import { File } from 'src/entities/fileEntity';
 
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
@@ -10,6 +12,7 @@ export const pgConfig: PostgresConnectionOptions = {
   entities: [
     UserEntity,
     File,
+    AdminEntity
   ],
 
   // ** synchronize in development mode should be true and in production mode should be false ** //

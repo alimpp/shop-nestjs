@@ -2,13 +2,10 @@ import {
   Controller,
   Post,
   Body,
-  UseGuards,
-  Request,
   HttpStatus,
   HttpCode,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { LocalAuthGuard } from './guards/local-auth/local-auth.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -28,13 +25,15 @@ export class AuthController {
   }
 
   @HttpCode(HttpStatus.OK)
-  @UseGuards(LocalAuthGuard)
   @Post('login')
-  async login(@Request() req) {
-    const token = await this.authService.login(req.user.id);
-    return {
-      user_id: req.user.id,
-      token,
-    };
+  async login(@Body() body: {username: string, password: string}) {    
+    const admin = await this.authService.validateAdmin(body)
+    if(admin) {
+      const token = await this.authService.adminLogin(admin.id);
+      return {
+        id: admin.id,
+        token,
+      };
+    }
   }
 }
