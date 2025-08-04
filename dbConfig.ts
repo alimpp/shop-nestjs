@@ -2,6 +2,7 @@ import { UserEntity } from 'src/entities/user.entity';
 import { AdminEntity } from 'src/entities/admin.entity';
 import { AddressEntity } from 'src/entities/address.entity';
 import { CategoryEntity } from 'src/entities/category.entity';
+import { CategoryHistoryEntity } from 'src/entities/categoryHistory.entity';
 
 import { File } from 'src/entities/fileEntity';
 
@@ -16,7 +17,8 @@ export const pgConfig: PostgresConnectionOptions = {
     File,
     AdminEntity,
     AddressEntity,
-    CategoryEntity
+    CategoryEntity,
+    CategoryHistoryEntity
   ],
 
   // ** synchronize in development mode should be true and in production mode should be false ** //
