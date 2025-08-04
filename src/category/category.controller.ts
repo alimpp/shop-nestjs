@@ -66,7 +66,7 @@ export class CategoryController {
       await this.categoryService.update(id, body);
       await this.categoryService.createHistory({
         submiter: req.user.id,
-        content: `Category "${lastCategoryData.name}" changed to "${body.name}"`
+        content: `Category ${lastCategoryData.name} changed to ${body.name}`
       });
 
       return {
