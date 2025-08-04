@@ -1,24 +1,15 @@
 import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn } from 'typeorm';
 
 @Entity()
-export class UserEntity {
+export class CategoryEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
-  fristname: string;
+  name: string
 
   @Column()
-  lastname: string;
-
-  @Column()
-  email: string;
-
-  @Column()
-  avatarUrl: string;
-
-  @Column()
-  phone: string;
+  submiter: string
 
   @CreateDateColumn({ type: 'timestamp' })
   created_at: Date;

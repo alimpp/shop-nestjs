@@ -10,6 +10,7 @@ import { UsersModule } from './users/users.module';
 import { OtpModule } from './otp/otp.module';
 import { AdminModule } from './admin/admin.module';
 import { AddressModule } from './address/address.module';
+import { CategoryModule } from './category/category.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { AddressModule } from './address/address.module';
     OtpModule,
     AdminModule,
     AddressModule,
+    CategoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],

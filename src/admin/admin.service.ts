@@ -22,4 +22,8 @@ export class AdminService {
             }
         })
     }
+
+     async findAdminById(id: string) {
+        return await this.adminRepo.findOne({ where: { id } })
+    }
 }
