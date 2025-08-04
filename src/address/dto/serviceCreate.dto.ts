@@ -12,4 +12,7 @@ export class CreateDto {
   @IsString()
   @Length(10, 10)
   postalCode: string;
+
+  @IsString()
+  userId?: string
 }

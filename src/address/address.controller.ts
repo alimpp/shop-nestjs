@@ -8,6 +8,7 @@ import {
   Body, 
   UseGuards,
   Request,
+  NotFoundException
 } from '@nestjs/common';
 import { AddressService } from './address.service';
 import { CreateDto } from './dto/create.dto';
@@ -21,9 +22,9 @@ export class AddressController {
 
   @Get('/all/admin')
   async getAllAddresses(@Request() req) {
-    if(req.user.role == 'admin') {
-      return await this.addressService.getAllAddress();
-    }
+    if(req.user.role != 'admin') throw new NotFoundException('Not Found Exception')
+    return await this.addressService.getAllAddress();
+
   }
 
   @Get('/all/user')
