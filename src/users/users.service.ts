@@ -22,9 +22,7 @@ export class UsersService {
   }
 
   async getUserById(id: string) {
-    const user = await this.userRepository.findOne({ where: { id } });
-    if (!user) throw new NotFoundException();
-    return user;
+    return await this.userRepository.findOne({ where: { id } });
   }
 
   async createUser(body: CreateDto) {
@@ -33,10 +31,6 @@ export class UsersService {
   }
 
   async updateUser(id: string, body: UpdateUserDto) {
-    const user = await this.userRepository.findOne({ where: { id } });
-    if (!user) {
-      return { message: 'User not found' };
-    }
     return await this.userRepository.update(id, body);
   }
 }
