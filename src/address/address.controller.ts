@@ -48,7 +48,9 @@ export class AddressController {
     @Body() updateDto: UpdateDto,
     @Request() req
   ) {
-    return await this.addressService.update(id, updateDto);
+    const address = await this.addressService.update(id, updateDto);
+    if(!address) throw new NotFoundException(`Address with id ${id} not found`) 
+    return address
   }
 
   @Delete(':id')
@@ -56,6 +58,8 @@ export class AddressController {
     @Param('id') id: string,
     @Request() req
   ) {
-    return await this.addressService.remove(id);
+    const address = this.addressService.remove(id);
+    if(!address) throw new NotFoundException(`Address with id ${id} not found`)
+    return address 
   }
 }

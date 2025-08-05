@@ -27,14 +27,10 @@ export class AddressService {
     }
 
     async update(id: string, body: UpdateDto) {
-        const address = await this.addressRepository.find({ where: { id } })
-         if(!address) throw new NotFoundException(`Address with id ${id} not found`)
         return await this.addressRepository.update(id, body)
     }
 
     async remove(id: string) {
-        const address = await this.addressRepository.find({ where: { id } })
-        if(!address) throw new NotFoundException(`Address with id ${id} not found`)
         await this.addressRepository.delete(id)
     }
 }
