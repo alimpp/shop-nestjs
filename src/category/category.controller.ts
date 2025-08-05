@@ -9,6 +9,7 @@ import {
   UseGuards,
   Request,
   UnauthorizedException,
+  NotFoundException
 } from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { CreateDto } from './dto/create.dto';
@@ -27,6 +28,7 @@ export class CategoryController {
     @Get('/history')
     async getAllHistory() {
       const historyList = await this.categoryService.allHistory();
+
       const result = await Promise.all(historyList.map(async (item) => {
         const admin = await this.adminService.findAdminById(item.submiter);
         return {
@@ -45,10 +47,13 @@ export class CategoryController {
 
     @Post('/add')
     async add(@Body() body: CreateDto,@Request() req) {    
+
       const admin = await this.adminService.findAdminById(req.user.id)    
-      if(!admin) throw new Error('Bad Access . . .') 
+      if(!admin) throw new UnauthorizedException('Unauthorized access');
+
       const newCategory = await this.categoryService.add({...body, submiter: req.user.id});
-      await this.categoryService.createHistory({submiter: req.user.id, content: `Category ${newCategory.name} Created`})
+      await this.categoryService.createHistory({submiter: req.user.id, content: `Category ${newCategory.name} created`})
+
       return newCategory
     }
 
@@ -58,11 +63,13 @@ export class CategoryController {
       @Body() body: UpdateDto,
       @Request() req
     ) {
+
       const admin = await this.adminService.findAdminById(req.user.id);
-      if (!admin) {
-        throw new UnauthorizedException('Unauthorized access');
-      }
+      if(!admin) throw new UnauthorizedException('Unauthorized access');
+
       const lastCategoryData = await this.categoryService.findById(id);
+      if(!lastCategoryData) throw new NotFoundException(`Category with id ${id} not found`)
+
       await this.categoryService.update(id, body);
       await this.categoryService.createHistory({
         submiter: req.user.id,
@@ -77,9 +84,23 @@ export class CategoryController {
 
     @Delete(':id')
     async delete(@Param('id') id: string,@Request() req) {
+
       const admin = await this.adminService.findAdminById(req.user.id)    
-      if(!admin) throw new Error('Bad Access . . .') 
-      return await this.categoryService.remove(id);
+      if(!admin) throw new UnauthorizedException('Unauthorized access'); 
+
+      const lastCategoryData = await this.categoryService.findById(id);
+      if(!lastCategoryData) throw new NotFoundException(`Category with id ${id} not found`)
+
+      await this.categoryService.remove(id);
+      await this.categoryService.createHistory({
+        submiter: req.user.id,
+        content: `Category ${lastCategoryData.name} deleted`
+      });
+
+      return {
+        success: true,
+        message: 'Category deleted'
+      };
     }
     
 }

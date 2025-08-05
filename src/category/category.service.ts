@@ -24,9 +24,7 @@ export class CategoryService {
     }
 
     async findById(id: string) {
-        const category = await this.categoryRepository.findOne({ where: { id } })
-        if(!category) throw new NotFoundException(`category with id ${id} not found`)
-        return category
+        return await this.categoryRepository.findOne({ where: { id } })
     }
 
     async createHistory(body: {submiter: string, content: string}) {
@@ -40,14 +38,10 @@ export class CategoryService {
     }
 
     async update(id: string, body: UpdateDto) {
-        const category = await this.categoryRepository.find({ where: { id } })
-        if(!category) throw new NotFoundException(`category with id ${id} not found`)
         return await this.categoryRepository.update(id, body)
     }
 
     async remove(id: string) {
-        const category = await this.categoryRepository.find({ where: { id } })
-        if(!category) throw new NotFoundException(`category with id ${id} not found`)
         await this.categoryRepository.delete(id)
     }
 }
