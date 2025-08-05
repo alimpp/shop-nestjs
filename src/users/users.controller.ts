@@ -7,6 +7,7 @@ import {
   Patch,
   Req,
   UseGuards,
+  NotFoundException
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateDto } from './dto/createUser.dto';
@@ -28,12 +29,16 @@ export class UsersController {
   @UseGuards(JwtAuthGuard)
   @Get('/profile')
   async getUserProfile(@Req() req) {
-    return await this.usersService.getUserById(req.user.id);
+    const user = await this.usersService.getUserById(req.user.id);
+    if(!user) throw new NotFoundException(`This user with id ${req.user.id} bot found`)
+    return user
   }
 
   @UseGuards(JwtAuthGuard)
   @Get(':id')
   async getUserById(@Req() req, @Param('id') id: string) {
+    const user = await this.usersService.getUserById(req.user.id);
+    if(!user) throw new NotFoundException(`This user with id ${id} bot found`)
     return await this.usersService.getUserById(id);
   }
 
