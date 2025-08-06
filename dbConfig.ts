@@ -3,7 +3,8 @@ import { AdminEntity } from 'src/entities/admin.entity';
 import { AddressEntity } from 'src/entities/address.entity';
 import { CategoryEntity } from 'src/entities/category.entity';
 import { CategoryHistoryEntity } from 'src/entities/categoryHistory.entity';
-
+import { ProperttyEntity } from 'src/entities/propertty.entity';
+import { ProperttyHistoryEntity } from 'src/entities/properttyHistory.entity';
 import { File } from 'src/entities/fileEntity';
 
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
@@ -18,7 +19,9 @@ export const pgConfig: PostgresConnectionOptions = {
     AdminEntity,
     AddressEntity,
     CategoryEntity,
-    CategoryHistoryEntity
+    CategoryHistoryEntity,
+    ProperttyEntity,
+    ProperttyHistoryEntity
   ],
 
   // ** synchronize in development mode should be true and in production mode should be false ** //

@@ -1,23 +1,24 @@
 import { Module, ValidationPipe } from '@nestjs/common';
-import { CategoryService } from './category.service';
-import { CategoryController } from './category.controller';
-import { CategoryEntity } from 'src/entities/category.entity';
-import { CategoryHistoryEntity } from 'src/entities/categoryHistory.entity';
+import { ProperttyService } from './propertty.service';
+import { ProperttyController } from './propertty.controller';
+import { ProperttyEntity } from 'src/entities/propertty.entity';
+import { ProperttyHistoryEntity } from 'src/entities/properttyHistory.entity';
 import { APP_PIPE } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AdminService } from 'src/admin/admin.service';
 import { AdminEntity } from 'src/entities/admin.entity';
+
 @Module({
   imports: [
     TypeOrmModule.forFeature([
-      CategoryEntity,
-      CategoryHistoryEntity,
+      ProperttyEntity,
+      ProperttyHistoryEntity,
       AdminEntity,
     ]),
   ],
   providers: [
-    CategoryService,
+    ProperttyService,
     AdminService,
     {
       provide: APP_PIPE,
@@ -27,6 +28,6 @@ import { AdminEntity } from 'src/entities/admin.entity';
       }),
     },
   ],
-  controllers: [CategoryController]
+  controllers: [ProperttyController]
 })
-export class CategoryModule {}
+export class ProperttyModule {}

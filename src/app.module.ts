@@ -11,6 +11,7 @@ import { OtpModule } from './otp/otp.module';
 import { AdminModule } from './admin/admin.module';
 import { AddressModule } from './address/address.module';
 import { CategoryModule } from './category/category.module';
+import { ProperttyModule } from './propertty/propertty.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { CategoryModule } from './category/category.module';
     AdminModule,
     AddressModule,
     CategoryModule,
+    ProperttyModule,
   ],
   controllers: [AppController],
   providers: [AppService],
