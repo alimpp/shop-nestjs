@@ -1,4 +1,10 @@
-import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, OneToOne } from 'typeorm';
+import {
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  OneToOne,
+} from 'typeorm';
 import { ProperttyEntity } from './propertty.entity';
 
 @Entity()
@@ -7,14 +13,14 @@ export class ProperttyValueEntity {
   id: string;
 
   @Column()
-  name: string
+  name: string;
 
   @Column()
-  submiter: string
+  submiter: string;
 
   @CreateDateColumn({ type: 'timestamp' })
   created_at: Date;
 
   @OneToOne(() => ProperttyEntity, (propertty) => propertty.properttyValue)
-  propertty: ProperttyEntity
+  propertty: ProperttyEntity;
 }

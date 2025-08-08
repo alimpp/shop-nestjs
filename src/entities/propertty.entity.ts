@@ -1,15 +1,21 @@
-import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, OneToOne } from 'typeorm';
-import { ProperttyValueEntity } from './properttyValue.entity'
+import {
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  OneToOne,
+} from 'typeorm';
+import { ProperttyValueEntity } from './properttyValue.entity';
 @Entity()
 export class ProperttyEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
-  name: string
+  name: string;
 
   @Column()
-  submiter: string
+  submiter: string;
 
   @CreateDateColumn({ type: 'timestamp' })
   created_at: Date;

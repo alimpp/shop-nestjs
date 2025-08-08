@@ -1,7 +1,12 @@
-import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+} from 'typeorm';
 
 @Entity()
-export class ProperttyHistoryEntity {
+export class ProperttyValueHistoryEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -9,8 +14,8 @@ export class ProperttyHistoryEntity {
   created_at: Date;
 
   @Column()
-  submiter: string
+  submiter: string;
 
   @Column()
-  content: string
+  content: string;
 }
