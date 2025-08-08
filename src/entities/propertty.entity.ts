@@ -3,7 +3,7 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   CreateDateColumn,
-  OneToOne,
+  OneToMany,
 } from 'typeorm';
 import { ProperttyValueEntity } from './properttyValue.entity';
 @Entity()
@@ -20,6 +20,6 @@ export class ProperttyEntity {
   @CreateDateColumn({ type: 'timestamp' })
   created_at: Date;
 
-  @OneToOne(() => ProperttyValueEntity, (propertty) => propertty.propertty)
+  @OneToMany(() => ProperttyValueEntity, (propertty) => propertty.propertty)
   properttyValue: ProperttyValueEntity;
 }
