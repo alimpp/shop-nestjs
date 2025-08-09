@@ -14,6 +14,7 @@ import { CategoryModule } from './category/category.module';
 import { ProperttyModule } from './propertty/propertty.module';
 import { ProperttyValueModule } from './propertty-value/propertty-value.module';
 import { SupportModule } from './support/support.module';
+import { NotificationModule } from './notification/notification.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { SupportModule } from './support/support.module';
     ProperttyModule,
     ProperttyValueModule,
     SupportModule,
+    NotificationModule,
   ],
   controllers: [AppController],
   providers: [AppService],

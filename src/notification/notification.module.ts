@@ -1,9 +1,6 @@
 import { Module, ValidationPipe } from '@nestjs/common';
-import { SupportService } from './support.service';
-import { SupportController } from './support.controller';
-import { SupportEntity } from 'src/entities/support.entity';
-import { ChatListEntity } from 'src/entities/chatList.entity';
-import { NotificationService } from 'src/notification/notification.service';
+import { NotificationService } from './notification.service';
+import { NotificationController } from './notification.controller';
 import { NotificationEntity } from 'src/entities/notification.entity';
 import { APP_PIPE } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -11,13 +8,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 @Module({
   imports: [
     TypeOrmModule.forFeature([
-      SupportEntity,
-      ChatListEntity,
-      NotificationEntity
+     NotificationEntity
     ]),
   ],
   providers: [
-    SupportService,
     NotificationService,
     {
       provide: APP_PIPE,
@@ -27,6 +21,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       }),
     },
   ],
-  controllers: [SupportController]
+  controllers: [NotificationController]
 })
-export class SupportModule {}
+export class NotificationModule {}

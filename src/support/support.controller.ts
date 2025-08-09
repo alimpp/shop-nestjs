@@ -3,15 +3,13 @@ import {
   Get, 
   Post, 
   Patch, 
-  Delete, 
   Param, 
   Body, 
   UseGuards,
   Request,
-  UnauthorizedException,
-  NotFoundException
 } from '@nestjs/common';
 import { SupportService } from './support.service';
+import { NotificationService } from 'src/notification/notification.service';
 import { SendDto } from './dto/sendMsg.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth/jwt-auth.guard';
 
@@ -19,7 +17,7 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth/jwt-auth.guard';
 @UseGuards(JwtAuthGuard)
 export class SupportController {
 
-  constructor(private readonly supportService: SupportService) {}
+  constructor(private readonly supportService: SupportService, private readonly notificationService: NotificationService) {}
 
   @Get(':chatId')
   async getMessagesByChatId(@Param('chatId') chatId: string, @Request() req) {
@@ -51,7 +49,19 @@ export class SupportController {
         {badge: targetChat.badge + 1, lastMessageContent: newMessage.content, lastMessageTime: newMessage.created_at}
       )
     }
-    
+  }
+
+  @Post('/admin/send-message')
+  async sendMessageAdmin(@Body() body: SendDto, @Request() req) {
+    const newMsg = {
+      ...body,
+      seen: false,
+      from: req.user.id
+    } 
+    await this.supportService.sendMessage(newMsg) 
+    await this.notificationService.addNotification(
+      {to: newMsg.chatId, content: 'New message from admin support', seen: false}
+    )
   }
 
   @Patch(':id')
