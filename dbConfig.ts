@@ -8,6 +8,7 @@ import { ProperttyHistoryEntity } from 'src/entities/properttyHistory.entity';
 import { ProperttyValueEntity } from 'src/entities/properttyValue.entity';
 import { ProperttyValueHistoryEntity } from 'src/entities/properttyValueHistory.entity';
 import { SupportEntity } from 'src/entities/support.entity';
+import { ChatListEntity } from 'src/entities/chatList.entity';
 import { File } from 'src/entities/fileEntity';
 
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
@@ -27,7 +28,8 @@ export const pgConfig: PostgresConnectionOptions = {
     ProperttyHistoryEntity,
     ProperttyValueEntity,
     ProperttyValueHistoryEntity,
-    SupportEntity
+    SupportEntity,
+    ChatListEntity
   ],
 
   // ** synchronize in development mode should be true and in production mode should be false ** //
