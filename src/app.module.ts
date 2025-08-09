@@ -13,6 +13,7 @@ import { AddressModule } from './address/address.module';
 import { CategoryModule } from './category/category.module';
 import { ProperttyModule } from './propertty/propertty.module';
 import { ProperttyValueModule } from './propertty-value/propertty-value.module';
+import { SupportModule } from './support/support.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { ProperttyValueModule } from './propertty-value/propertty-value.module';
     CategoryModule,
     ProperttyModule,
     ProperttyValueModule,
+    SupportModule,
   ],
   controllers: [AppController],
   providers: [AppService],
