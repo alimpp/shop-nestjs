@@ -5,25 +5,29 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class AdminService {
-    constructor(
-        @InjectRepository(AdminEntity)
-        private readonly adminRepo: Repository<AdminEntity>
-    ) {}
+  constructor(
+    @InjectRepository(AdminEntity)
+    private readonly adminRepo: Repository<AdminEntity>,
+  ) {}
 
-    async getAll() {
-        return await this.adminRepo.find()
-    }
+  async getAll() {
+    return await this.adminRepo.find();
+  }
 
-    async findAdmin(username: string, password: string) {
-        return await this.adminRepo.findOne({ 
-            where: { 
-                username: username,
-                password: password 
-            }
-        })
-    }
+  async getAdmin(id: string) {
+    return await this.adminRepo.findOne({ where: { id } });
+  }
 
-     async findAdminById(id: string) {
-        return await this.adminRepo.findOne({ where: { id } })
-    }
+  async findAdmin(username: string, password: string) {
+    return await this.adminRepo.findOne({
+      where: {
+        username: username,
+        password: password,
+      },
+    });
+  }
+
+  async findAdminById(id: string) {
+    return await this.adminRepo.findOne({ where: { id } });
+  }
 }
