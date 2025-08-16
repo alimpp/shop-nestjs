@@ -16,6 +16,17 @@ import { UsersService } from 'src/users/users.service';
 import { SendDto } from './dto/sendMsg.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth/jwt-auth.guard';
 
+interface IChat {
+  itsMe: boolean;
+  id: string;
+  created_at: Date;
+  chatId: string;
+  type: string;
+  seen: Boolean;
+  content: string;
+  from: string;
+}
+
 @Controller('support')
 @UseGuards(JwtAuthGuard)
 export class SupportController {
@@ -47,10 +58,19 @@ export class SupportController {
   @Get(':chatId')
   async getMessagesByChatId(@Param('chatId') chatId: string, @Request() req) {
     const messages = await this.supportService.getMessagesByChatId(chatId);
-    return messages.sort(
+    const sortedList = messages.sort(
       (a, b) =>
         new Date(a.created_at).getTime() - new Date(b.created_at).getTime(),
     );
+    let list : IChat[] = []
+    for(let key of sortedList) {
+      const obj: IChat = {
+        ...key,
+        itsMe: req.user.id == key.from ? true : false
+      }
+      list.push(obj)
+    }
+    return list
   }
 
   @Post('/send-message')
