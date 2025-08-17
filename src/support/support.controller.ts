@@ -30,6 +30,7 @@ interface IChat {
 @Controller('support')
 @UseGuards(JwtAuthGuard)
 export class SupportController {
+  
   constructor(
     private readonly supportService: SupportService,
     private readonly notificationService: NotificationService,
@@ -138,4 +139,5 @@ export class SupportController {
       }
     }
   }
+  
 }
