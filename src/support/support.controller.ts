@@ -89,6 +89,7 @@ export class SupportController {
         lastMessageContent: newMessage.content,
         lastMessageTime: newMessage.created_at,
       });
+      return {...newMessage, itsMe: true}
     } else {
       const newMsg = {
         ...body,
@@ -101,6 +102,7 @@ export class SupportController {
         lastMessageContent: newMessage.content,
         lastMessageTime: newMessage.created_at,
       });
+      return {...newMessage, itsMe: true}
     }
   }
 
@@ -111,12 +113,13 @@ export class SupportController {
       seen: false,
       from: req.user.id,
     };
-    await this.supportService.sendMessage(newMsg);
+    const result = await this.supportService.sendMessage(newMsg);
     await this.notificationService.addNotification({
       to: newMsg.chatId,
       content: 'New message from admin support',
       seen: false,
     });
+    return {...result, itsMe: true}
   }
 
   @Patch(':id')
