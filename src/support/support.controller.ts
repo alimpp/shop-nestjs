@@ -48,7 +48,10 @@ export class SupportController {
         const user = await this.usersSerive.getUserById(key.chatId);
         const obj = {
           ...key,
-          user,
+          user: {
+            ...user,
+            fullname: user?.fristname ? user?.fristname + ' ' + user?.lastname : ''
+          },
         };
         result.push(obj);
       }
