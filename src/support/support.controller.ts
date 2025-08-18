@@ -120,6 +120,14 @@ export class SupportController {
       content: 'New message from admin support',
       seen: false,
     });
+    const targetChat = await this.supportService.findChat(body.chatId);
+    if(targetChat) {
+      await this.supportService.updateChat(targetChat.id, {
+        badge: 0,
+        lastMessageContent: result.content,
+        lastMessageTime: result.created_at,
+      });
+    }
     return {...result, itsMe: true}
   }
 
