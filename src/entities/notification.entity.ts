@@ -9,6 +9,9 @@ export class NotificationEntity {
   to: string;
 
   @Column()
+  type: string;
+
+  @Column()
   content: string;
 
   @Column()

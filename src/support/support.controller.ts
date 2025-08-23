@@ -120,6 +120,7 @@ export class SupportController {
     const result = await this.supportService.sendMessage(newMsg);
     await this.notificationService.addNotification({
       to: newMsg.chatId,
+      type: 'message',
       content: 'New message from admin support',
       seen: false,
     });

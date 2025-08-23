@@ -22,7 +22,7 @@ export class NotificationController {
     }
 
     @Get('/add')
-    async addNotification(body: {content: string, to: string, seen: boolean}) {
+    async addNotification(body: {content: string, type: string ,to: string, seen: boolean}) {
        return await this.notificationService.addNotification(body)
     }
 

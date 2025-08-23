@@ -13,7 +13,7 @@ export class NotificationService {
         return this.notificationRepository.find({ where: { to } })
     }
 
-    async addNotification(body: {content: string, to: string, seen: boolean}) {
+    async addNotification(body: {content: string, type: string ,to: string, seen: boolean}) {
         const notif = this.notificationRepository.create(body)
         return await this.notificationRepository.save(notif)
     }
