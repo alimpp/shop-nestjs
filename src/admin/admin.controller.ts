@@ -1,6 +1,6 @@
-import { Controller, Get, UseGuards, Req } from '@nestjs/common';
-import { AdminService } from './admin.service';
+import { Controller, Get, Req, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth/jwt-auth.guard';
+import { AdminService } from './admin.service';
 
 @Controller('admin')
 export class AdminController {
