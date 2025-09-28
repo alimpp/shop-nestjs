@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { HeroEntity } from 'src/entities/hero.entity';
 import { Repository } from 'typeorm';
-
 import { CreateDto } from './dto/create.dto';
 import { UpdateDto } from './dto/update.dto';
 
