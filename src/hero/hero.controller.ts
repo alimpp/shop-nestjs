@@ -52,13 +52,10 @@ export class HeroController {
   ) {
     const admin = await this.adminService.findAdminById(req.user.id);
     if (!admin) throw new UnauthorizedException('Unauthorized access');
-
     const targetHero = await this.heroService.findById(id);
     if (!targetHero)
       throw new NotFoundException(`Hero with id ${id} not found`);
-
     await this.heroService.update(id, body);
-
     return {
       success: true,
       message: 'Hero updated successfully',
@@ -69,13 +66,10 @@ export class HeroController {
   async delete(@Param('id') id: string, @Request() req) {
     const admin = await this.adminService.findAdminById(req.user.id);
     if (!admin) throw new UnauthorizedException('Unauthorized access');
-
     const targetHero = await this.heroService.findById(id);
     if (!targetHero)
       throw new NotFoundException(`Hero with id ${id} not found`);
-
     await this.heroService.remove(id);
-
     return {
       success: true,
       message: 'Hero deleted',
