@@ -15,6 +15,7 @@ import { ProperttyModule } from './propertty/propertty.module';
 import { ProperttyValueModule } from './propertty-value/propertty-value.module';
 import { SupportModule } from './support/support.module';
 import { NotificationModule } from './notification/notification.module';
+import { HeroModule } from './hero/hero.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { NotificationModule } from './notification/notification.module';
     ProperttyValueModule,
     SupportModule,
     NotificationModule,
+    HeroModule,
   ],
   controllers: [AppController],
   providers: [AppService],
