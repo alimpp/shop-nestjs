@@ -4,7 +4,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { HeroEntity } from 'src/entities/hero.entity';
 import { HeroController } from './hero.controller';
 import { HeroService } from './hero.service';
-
 import { AdminService } from 'src/admin/admin.service';
 import { AdminEntity } from 'src/entities/admin.entity';
 
