@@ -52,6 +52,8 @@ export class CategoryController {
           category.submiter,
         );
         return {
+          imageId: category.imageId,
+          iconId: category.iconId,
           id: category.id,
           name: category.name,
           created_at: category.created_at,
@@ -80,8 +82,8 @@ export class CategoryController {
     return newCategory;
   }
 
-  @Patch(':id')
-  async update(
+  @Patch('/name/:id')
+  async updateName(
     @Param('id') id: string,
     @Body() body: UpdateDto,
     @Request() req,
@@ -97,6 +99,56 @@ export class CategoryController {
     await this.categoryService.createHistory({
       submiter: req.user.id,
       content: `Category ${lastCategoryData.name} changed to ${body.name}`,
+    });
+
+    return {
+      success: true,
+      message: 'Category updated successfully',
+    };
+  }
+
+  @Patch('/image/:id')
+  async updateImage(
+    @Param('id') id: string,
+    @Body() body: UpdateDto,
+    @Request() req,
+  ) {
+    const admin = await this.adminService.findAdminById(req.user.id);
+    if (!admin) throw new UnauthorizedException('Unauthorized access');
+
+    const lastCategoryData = await this.categoryService.findById(id);
+    if (!lastCategoryData)
+      throw new NotFoundException(`Category with id ${id} not found`);
+
+    await this.categoryService.update(id, body);
+    await this.categoryService.createHistory({
+      submiter: req.user.id,
+      content: `Category ${lastCategoryData.imageId} changed to ${body.imageId}`,
+    });
+
+    return {
+      success: true,
+      message: 'Category updated successfully',
+    };
+  }
+
+  @Patch('/icon/:id')
+  async updateIcon(
+    @Param('id') id: string,
+    @Body() body: UpdateDto,
+    @Request() req,
+  ) {
+    const admin = await this.adminService.findAdminById(req.user.id);
+    if (!admin) throw new UnauthorizedException('Unauthorized access');
+
+    const lastCategoryData = await this.categoryService.findById(id);
+    if (!lastCategoryData)
+      throw new NotFoundException(`Category with id ${id} not found`);
+
+    await this.categoryService.update(id, body);
+    await this.categoryService.createHistory({
+      submiter: req.user.id,
+      content: `Category ${lastCategoryData.iconId} changed to ${body.iconId}`,
     });
 
     return {

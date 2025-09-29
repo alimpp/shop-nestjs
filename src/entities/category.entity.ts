@@ -1,4 +1,9 @@
-import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class CategoryEntity {
@@ -6,10 +11,16 @@ export class CategoryEntity {
   id: string;
 
   @Column()
-  name: string
+  name: string;
 
   @Column()
-  submiter: string
+  submiter: string;
+
+  @Column()
+  imageId: string;
+
+  @Column()
+  iconId: string;
 
   @CreateDateColumn({ type: 'timestamp' })
   created_at: Date;

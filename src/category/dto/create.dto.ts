@@ -4,4 +4,10 @@ export class CreateDto {
   @IsString()
   @Length(2, 20)
   name: string;
+
+  @IsString()
+  imageId: string;
+
+  @IsString()
+  iconId: string;
 }
