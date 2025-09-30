@@ -45,7 +45,6 @@ export class CategoryController {
   @Get('/all')
   async getAllCategory() {
     const categories = await this.categoryService.getAll();
-
     const result = await Promise.all(
       categories.map(async (category) => {
         const submiter = await this.adminService.findAdminById(
@@ -61,7 +60,6 @@ export class CategoryController {
         };
       }),
     );
-
     return result;
   }
 
@@ -69,7 +67,6 @@ export class CategoryController {
   async add(@Body() body: CreateDto, @Request() req) {
     const admin = await this.adminService.findAdminById(req.user.id);
     if (!admin) throw new UnauthorizedException('Unauthorized access');
-
     const newCategory = await this.categoryService.add({
       ...body,
       submiter: req.user.id,
@@ -78,7 +75,6 @@ export class CategoryController {
       submiter: req.user.id,
       content: `Category ${newCategory.name} created`,
     });
-
     return newCategory;
   }
 
@@ -90,17 +86,14 @@ export class CategoryController {
   ) {
     const admin = await this.adminService.findAdminById(req.user.id);
     if (!admin) throw new UnauthorizedException('Unauthorized access');
-
     const lastCategoryData = await this.categoryService.findById(id);
     if (!lastCategoryData)
       throw new NotFoundException(`Category with id ${id} not found`);
-
     await this.categoryService.update(id, body);
     await this.categoryService.createHistory({
       submiter: req.user.id,
       content: `Category ${lastCategoryData.name} changed to ${body.name}`,
     });
-
     return {
       success: true,
       message: 'Category updated successfully',
@@ -115,17 +108,14 @@ export class CategoryController {
   ) {
     const admin = await this.adminService.findAdminById(req.user.id);
     if (!admin) throw new UnauthorizedException('Unauthorized access');
-
     const lastCategoryData = await this.categoryService.findById(id);
     if (!lastCategoryData)
       throw new NotFoundException(`Category with id ${id} not found`);
-
     await this.categoryService.update(id, body);
     await this.categoryService.createHistory({
       submiter: req.user.id,
       content: `Category ${lastCategoryData.imageId} changed to ${body.imageId}`,
     });
-
     return {
       success: true,
       message: 'Category updated successfully',
@@ -140,17 +130,14 @@ export class CategoryController {
   ) {
     const admin = await this.adminService.findAdminById(req.user.id);
     if (!admin) throw new UnauthorizedException('Unauthorized access');
-
     const lastCategoryData = await this.categoryService.findById(id);
     if (!lastCategoryData)
       throw new NotFoundException(`Category with id ${id} not found`);
-
     await this.categoryService.update(id, body);
     await this.categoryService.createHistory({
       submiter: req.user.id,
       content: `Category ${lastCategoryData.iconId} changed to ${body.iconId}`,
     });
-
     return {
       success: true,
       message: 'Category updated successfully',
@@ -161,11 +148,9 @@ export class CategoryController {
   async delete(@Param('id') id: string, @Request() req) {
     const admin = await this.adminService.findAdminById(req.user.id);
     if (!admin) throw new UnauthorizedException('Unauthorized access');
-
     const lastCategoryData = await this.categoryService.findById(id);
     if (!lastCategoryData)
       throw new NotFoundException(`Category with id ${id} not found`);
-
     await this.categoryService.remove(id);
     await this.categoryService.createHistory({
       submiter: req.user.id,
