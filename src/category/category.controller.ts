@@ -28,7 +28,6 @@ export class CategoryController {
   @Get('/history')
   async getAllHistory() {
     const historyList = await this.categoryService.allHistory();
-
     const result = await Promise.all(
       historyList.map(async (item) => {
         const admin = await this.adminService.findAdminById(item.submiter);
@@ -38,7 +37,6 @@ export class CategoryController {
         };
       }),
     );
-
     return result;
   }
 
