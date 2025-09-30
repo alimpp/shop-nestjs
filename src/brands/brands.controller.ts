@@ -45,12 +45,9 @@ export class BrandsController {
   ) {
     const admin = await this.adminService.findAdminById(req.user.id);
     if (!admin) throw new UnauthorizedException('Unauthorized access');
-
     const lastData = await this.brandsService.findById(id);
     if (!lastData) throw new NotFoundException(`Brand with id ${id} not found`);
-
     await this.brandsService.update(id, body);
-
     return {
       success: true,
       message: 'Brand updated successfully',
@@ -65,12 +62,9 @@ export class BrandsController {
   ) {
     const admin = await this.adminService.findAdminById(req.user.id);
     if (!admin) throw new UnauthorizedException('Unauthorized access');
-
     const lastData = await this.brandsService.findById(id);
     if (!lastData) throw new NotFoundException(`Brand with id ${id} not found`);
-
     await this.brandsService.update(id, body);
-
     return {
       success: true,
       message: 'Brand updated successfully',
@@ -85,7 +79,6 @@ export class BrandsController {
   ) {
     const admin = await this.adminService.findAdminById(req.user.id);
     if (!admin) throw new UnauthorizedException('Unauthorized access');
-
     const lastData = await this.brandsService.findById(id);
     if (!lastData) throw new NotFoundException(`Brand with id ${id} not found`);
     await this.brandsService.update(id, body);
