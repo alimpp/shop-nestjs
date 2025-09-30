@@ -17,6 +17,7 @@ import { SupportModule } from './support/support.module';
 import { NotificationModule } from './notification/notification.module';
 import { HeroModule } from './hero/hero.module';
 import { BrandsModule } from './brands/brands.module';
+import { BannersModule } from './banners/banners.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { BrandsModule } from './brands/brands.module';
     NotificationModule,
     HeroModule,
     BrandsModule,
+    BannersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

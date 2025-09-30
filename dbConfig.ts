@@ -1,5 +1,6 @@
 import { AddressEntity } from 'src/entities/address.entity';
 import { AdminEntity } from 'src/entities/admin.entity';
+import { BannersEntity } from 'src/entities/banners.entity';
 import { BrandsEntity } from 'src/entities/brand.entity';
 import { CategoryEntity } from 'src/entities/category.entity';
 import { CategoryHistoryEntity } from 'src/entities/categoryHistory.entity';
@@ -36,6 +37,7 @@ export const pgConfig: PostgresConnectionOptions = {
     NotificationEntity,
     HeroEntity,
     BrandsEntity,
+    BannersEntity,
   ],
 
   // ** synchronize in development mode should be true and in production mode should be false ** //
