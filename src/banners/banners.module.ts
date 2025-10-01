@@ -6,9 +6,9 @@ import { AdminEntity } from 'src/entities/admin.entity';
 import { BannersEntity } from 'src/entities/banners.entity';
 import { BannersController } from './banners.controller';
 import { BannersService } from './banners.service';
+
 @Module({
   imports: [TypeOrmModule.forFeature([BannersEntity, AdminEntity])],
-
   providers: [
     BannersService,
     AdminService,
