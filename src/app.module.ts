@@ -18,6 +18,7 @@ import { NotificationModule } from './notification/notification.module';
 import { HeroModule } from './hero/hero.module';
 import { BrandsModule } from './brands/brands.module';
 import { BannersModule } from './banners/banners.module';
+import { ServicesModule } from './services/services.module';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { BannersModule } from './banners/banners.module';
     HeroModule,
     BrandsModule,
     BannersModule,
+    ServicesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

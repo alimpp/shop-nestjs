@@ -12,6 +12,7 @@ import { ProperttyEntity } from 'src/entities/propertty.entity';
 import { ProperttyHistoryEntity } from 'src/entities/properttyHistory.entity';
 import { ProperttyValueEntity } from 'src/entities/properttyValue.entity';
 import { ProperttyValueHistoryEntity } from 'src/entities/properttyValueHistory.entity';
+import { ServicesEntity } from 'src/entities/services.entity';
 import { SupportEntity } from 'src/entities/support.entity';
 import { UserEntity } from 'src/entities/user.entity';
 
@@ -38,6 +39,7 @@ export const pgConfig: PostgresConnectionOptions = {
     HeroEntity,
     BrandsEntity,
     BannersEntity,
+    ServicesEntity,
   ],
 
   // ** synchronize in development mode should be true and in production mode should be false ** //
