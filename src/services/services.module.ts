@@ -9,7 +9,6 @@ import { ServicesService } from './services.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([ServicesEntity, AdminEntity])],
-
   providers: [
     ServicesService,
     AdminService,
