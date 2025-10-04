@@ -26,6 +26,9 @@ export class CreateDto {
   like: number;
 
   @IsNumber()
+  comment: number;
+
+  @IsNumber()
   readingTime: number;
 
   @IsString()

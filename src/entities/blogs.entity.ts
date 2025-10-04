@@ -18,6 +18,9 @@ export class BlogsEntity {
   like: number;
 
   @Column()
+  comment: number;
+
+  @Column()
   title: string;
 
   @Column()
