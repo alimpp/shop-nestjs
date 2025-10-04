@@ -29,4 +29,5 @@ import { AdminEntity } from 'src/entities/admin.entity';
   ],
   controllers: [CategoryController]
 })
+
 export class CategoryModule {}
