@@ -79,6 +79,7 @@ export class BlogsController {
     return await this.blogsService.getAllLike(blogId);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post('/like')
   async liked(@Body() body: { blogId: string }, @Request() req) {
     const targetBlog = await this.blogsService.findById(body.blogId);
@@ -101,6 +102,7 @@ export class BlogsController {
     });
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post('/dis-like')
   async disLike(@Body() body: { blogId: string }, @Request() req) {
     const targetBlog = await this.blogsService.findById(body.blogId);
@@ -118,5 +120,39 @@ export class BlogsController {
       like: targetBlog.like - 1,
     });
     return await this.blogsService.disLike(body.blogId);
+  }
+
+  @Post('/comments')
+  async getAllComment(@Body() body: { blogId: string }) {
+    const targetBlog = await this.blogsService.findById(body.blogId);
+    if (!targetBlog) {
+      throw new NotFoundException('Blog not found');
+    }
+    return await this.blogsService.getAllComment(body.blogId);
+  }
+
+  @Post('/add-comment')
+  async addComment(
+    @Body() body: { blogId: string; comment: string },
+    @Request() req,
+  ) {
+    const targetBlog = await this.blogsService.findById(body.blogId);
+    if (!targetBlog) {
+      throw new NotFoundException('Blog not found');
+    }
+    return await this.blogsService.addComment({
+      ...body,
+      commentFrom: req.user.id,
+    });
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Delete('/comment/:id')
+  async removeComment(@Param('id') id: string) {
+    await this.blogsService.removeComment(id);
+    return {
+      success: true,
+      message: 'Comment deleted',
+    };
   }
 }
