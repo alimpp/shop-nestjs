@@ -36,6 +36,11 @@ export class BlogsEntity {
     description: string;
   }>;
 
+  @Column({ type: 'jsonb', nullable: true })
+  tags: Array<{
+    name: string;
+  }>;
+
   @CreateDateColumn()
   createdAt: Date;
 

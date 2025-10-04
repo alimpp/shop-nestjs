@@ -21,6 +21,11 @@ export class SectionDto {
   image: string;
 }
 
+export class TagDto {
+  @IsString()
+  name: string;
+}
+
 export class CreateDto {
   @IsNumber()
   like: number;
@@ -51,6 +56,7 @@ export class CreateDto {
 
   @IsArray()
   @ValidateNested({ each: true })
+  @Type(() => TagDto)
   @IsOptional()
-  tags: string[];
+  tags: TagDto[];
 }
