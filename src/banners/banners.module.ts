@@ -22,4 +22,5 @@ import { BannersService } from './banners.service';
   ],
   controllers: [BannersController],
 })
+  
 export class BannersModule {}
