@@ -19,6 +19,7 @@ import { HeroModule } from './hero/hero.module';
 import { BrandsModule } from './brands/brands.module';
 import { BannersModule } from './banners/banners.module';
 import { ServicesModule } from './services/services.module';
+import { BlogsModule } from './blogs/blogs.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { ServicesModule } from './services/services.module';
     BrandsModule,
     BannersModule,
     ServicesModule,
+    BlogsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
