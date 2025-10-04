@@ -18,7 +18,6 @@ import { BlogsService } from './blogs.service';
       AdminEntity,
     ]),
   ],
-
   providers: [
     BlogsService,
     AdminService,
