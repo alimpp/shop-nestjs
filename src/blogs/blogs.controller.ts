@@ -85,20 +85,16 @@ export class BlogsController {
     if (!targetBlog) {
       throw new NotFoundException('Blog not found');
     }
-
     const existingLike = await this.blogsService.findLikeById({
       blogId: body.blogId,
       likedBy: req.user.id,
     });
-
     if (existingLike) {
       throw new ConflictException('You have already liked this blog');
     }
-
     await this.blogsService.update(body.blogId, {
       like: targetBlog.like + 1,
     });
-
     return await this.blogsService.liked({
       blogId: body.blogId,
       likedBy: req.user.id,
@@ -111,20 +107,16 @@ export class BlogsController {
     if (!targetBlog) {
       throw new NotFoundException('Blog not found');
     }
-
     const existingLike = await this.blogsService.findLikeById({
       blogId: body.blogId,
       likedBy: req.user.id,
     });
-
     if (existingLike) {
       throw new ConflictException('You have already liked this blog');
     }
-
     await this.blogsService.update(body.blogId, {
       like: targetBlog.like - 1,
     });
-
     return await this.blogsService.disLike(body.blogId);
   }
 }
