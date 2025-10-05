@@ -20,6 +20,7 @@ import { BrandsModule } from './brands/brands.module';
 import { BannersModule } from './banners/banners.module';
 import { ServicesModule } from './services/services.module';
 import { BlogsModule } from './blogs/blogs.module';
+import { ProductsModule } from './products/products.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { BlogsModule } from './blogs/blogs.module';
     BannersModule,
     ServicesModule,
     BlogsModule,
+    ProductsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

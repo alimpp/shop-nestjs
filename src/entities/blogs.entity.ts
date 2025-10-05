@@ -29,11 +29,15 @@ export class BlogsEntity {
   @Column()
   description: string;
 
+  @Column()
+  image: string;
+
   @Column({ type: 'jsonb', nullable: true })
   sections: Array<{
     title: string;
     subTitle: string;
     description: string;
+    image: string;
   }>;
 
   @Column({ type: 'jsonb', nullable: true })
