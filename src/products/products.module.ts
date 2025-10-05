@@ -8,6 +8,7 @@ import { ProductsCommentEntity } from 'src/entities/productsComment.entity';
 import { ProductsLikeEntity } from 'src/entities/productsLike.entity';
 import { ProductsController } from './products.controller';
 import { ProductsService } from './products.service';
+
 @Module({
   imports: [
     TypeOrmModule.forFeature([
@@ -30,4 +31,5 @@ import { ProductsService } from './products.service';
   ],
   controllers: [ProductsController],
 })
+  
 export class ProductsModule {}
