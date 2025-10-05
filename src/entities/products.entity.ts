@@ -19,6 +19,7 @@ export class ProductsEntity {
   
   @Column()
   description: string;
+  
   @Column({ type: 'jsonb', nullable: true })
   category: Array<{
     id: string;
