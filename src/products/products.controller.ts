@@ -24,6 +24,7 @@ export class ProductsController {
     private readonly productsService: ProductsService,
     private readonly adminService: AdminService,
   ) {}
+
   @Get('/all')
   async getAllItems() {
     return await this.productsService.getAll();
@@ -67,7 +68,7 @@ export class ProductsController {
     const admin = await this.adminService.findAdminById(req.user.id);
     if (!admin) throw new UnauthorizedException('Unauthorized access');
     const target = await this.productsService.findById(id);
-    if (!target) throw new NotFoundException(`Hero with id ${id} not found`);
+    if (!target) throw new NotFoundException(`Product with id ${id} not found`);
     await this.productsService.remove(id);
     return {
       success: true,
@@ -115,7 +116,7 @@ export class ProductsController {
       likedBy: req.user.id,
     });
     if (existingLike) {
-      throw new ConflictException('You have already liked this blog');
+      throw new ConflictException('You have already liked this product');
     }
     await this.productsService.update(body.productId, {
       likes: targetBlog.like - 1,
@@ -149,7 +150,9 @@ export class ProductsController {
 
   @UseGuards(JwtAuthGuard)
   @Delete('/comment/:id')
-  async removeComment(@Param('id') id: string) {
+  async removeComment(@Param('id') id: string, @Request() req) {
+    const admin = await this.adminService.findAdminById(req.user.id);
+    if (!admin) throw new UnauthorizedException('Unauthorized access');
     await this.productsService.removeComment(id);
     return {
       success: true,
