@@ -35,6 +35,9 @@ export class ProductsEntity {
   @Column()
   comment: number;
 
+  @Column()
+  brand: string;
+
   @Column({ type: 'jsonb', nullable: true })
   info: Array<{
     name: string;

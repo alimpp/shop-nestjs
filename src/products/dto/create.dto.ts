@@ -100,6 +100,9 @@ export class CreateDto {
   @IsNumber()
   comments: number;
 
+  @IsString()
+  brand: string;
+
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => InfoDto)
