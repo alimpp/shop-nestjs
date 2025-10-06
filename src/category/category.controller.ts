@@ -18,7 +18,6 @@ import { CreateDto } from './dto/create.dto';
 import { UpdateDto } from './dto/update.dto';
 
 @Controller('category')
-@UseGuards(JwtAuthGuard)
 export class CategoryController {
   constructor(
     private readonly categoryService: CategoryService,
@@ -26,6 +25,7 @@ export class CategoryController {
   ) {}
 
   @Get('/history')
+  @UseGuards(JwtAuthGuard)
   async getAllHistory() {
     const historyList = await this.categoryService.allHistory();
     const result = await Promise.all(
@@ -62,6 +62,7 @@ export class CategoryController {
   }
 
   @Post('/add')
+  @UseGuards(JwtAuthGuard)
   async add(@Body() body: CreateDto, @Request() req) {
     const admin = await this.adminService.findAdminById(req.user.id);
     if (!admin) throw new UnauthorizedException('Unauthorized access');
@@ -77,6 +78,7 @@ export class CategoryController {
   }
 
   @Patch('/name/:id')
+  @UseGuards(JwtAuthGuard)
   async updateName(
     @Param('id') id: string,
     @Body() body: UpdateDto,
@@ -99,6 +101,7 @@ export class CategoryController {
   }
 
   @Patch('/image/:id')
+  @UseGuards(JwtAuthGuard)
   async updateImage(
     @Param('id') id: string,
     @Body() body: UpdateDto,
@@ -121,6 +124,7 @@ export class CategoryController {
   }
 
   @Patch('/icon/:id')
+  @UseGuards(JwtAuthGuard)
   async updateIcon(
     @Param('id') id: string,
     @Body() body: UpdateDto,
@@ -143,6 +147,7 @@ export class CategoryController {
   }
 
   @Delete(':id')
+  @UseGuards(JwtAuthGuard)
   async delete(@Param('id') id: string, @Request() req) {
     const admin = await this.adminService.findAdminById(req.user.id);
     if (!admin) throw new UnauthorizedException('Unauthorized access');
