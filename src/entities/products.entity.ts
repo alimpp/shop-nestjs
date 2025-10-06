@@ -30,10 +30,10 @@ export class ProductsEntity {
   priceAfterDiscount: number;
 
   @Column()
-  like: number;
+  likes: number;
 
   @Column()
-  comment: number;
+  comments: number;
 
   @Column()
   brand: string;

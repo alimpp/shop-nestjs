@@ -4,6 +4,7 @@ import {
   IsNumber,
   IsOptional,
   IsString,
+  IsUUID,
   ValidateNested,
 } from 'class-validator';
 
@@ -71,6 +72,7 @@ export class RelatedBlogsDto {
 }
 
 export class ImagesDto {
+  @IsUUID()
   imageId: string;
 }
 

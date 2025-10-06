@@ -40,7 +40,12 @@ export class ProductsController {
   async add(@Body() body: CreateDto, @Request() req) {
     const admin = await this.adminService.findAdminById(req.user.id);
     if (!admin) throw new UnauthorizedException('Unauthorized access');
-    return await this.productsService.add(body);
+    return await this.productsService.add({ ...body, submiter: req.user.id });
+  }
+
+  @Post('/search')
+  async smartSearch(@Body() body: { name: string }) {
+    return await this.productsService.searchByNameSimilar(body.name);
   }
 
   @UseGuards(JwtAuthGuard)
@@ -96,7 +101,7 @@ export class ProductsController {
       throw new ConflictException('You have already liked this blog');
     }
     await this.productsService.update(body.productId, {
-      likes: targetBlog.like + 1,
+      likes: targetBlog.likes + 1,
     });
     return await this.productsService.liked({
       productId: body.productId,
@@ -119,7 +124,7 @@ export class ProductsController {
       throw new ConflictException('You have already liked this product');
     }
     await this.productsService.update(body.productId, {
-      likes: targetBlog.like - 1,
+      likes: targetBlog.likes - 1,
     });
     return await this.productsService.disLike(body.productId);
   }

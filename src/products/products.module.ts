@@ -31,5 +31,4 @@ import { ProductsService } from './products.service';
   ],
   controllers: [ProductsController],
 })
-  
 export class ProductsModule {}

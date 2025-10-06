@@ -3,9 +3,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { ProductsEntity } from 'src/entities/products.entity';
 import { ProductsCommentEntity } from 'src/entities/productsComment.entity';
 import { ProductsLikeEntity } from 'src/entities/productsLike.entity';
-import { Repository } from 'typeorm';
+import { ILike, Repository } from 'typeorm';
 import { CreateDto } from './dto/create.dto';
 import { UpdateDto } from './dto/update.dto';
+
 @Injectable()
 export class ProductsService {
   constructor(
@@ -21,8 +22,34 @@ export class ProductsService {
     return await this.productsRepository.find();
   }
 
+  async searchByName(name: string) {
+    return await this.productsRepository.findOne({ where: { name } });
+  }
+
   async findById(id: string) {
     return await this.productsRepository.findOne({ where: { id } });
+  }
+
+  async searchByNameSimilar(name: string): Promise<ProductsEntity[]> {
+    return await this.productsRepository.find({
+      where: {
+        name: ILike(`%${name}%`),
+      },
+      order: {
+        name: 'ASC',
+      },
+      take: 20,
+    });
+  }
+
+  async findByBrand(brand: string) {
+    return await this.productsRepository.find({ where: { brand } });
+  }
+
+  async findByCategory(category: string) {
+    return await this.productsRepository.find({
+      where: { category: { id: category } },
+    });
   }
 
   async add(body: CreateDto) {
