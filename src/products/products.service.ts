@@ -22,6 +22,10 @@ export class ProductsService {
     return await this.productsRepository.find();
   }
 
+  async findBySlug(slug: string) {
+    return await this.productsRepository.findOne({ where: { slug } });
+  }
+
   async searchByName(name: string) {
     return await this.productsRepository.findOne({ where: { name } });
   }
