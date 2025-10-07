@@ -21,6 +21,7 @@ import { BannersModule } from './banners/banners.module';
 import { ServicesModule } from './services/services.module';
 import { BlogsModule } from './blogs/blogs.module';
 import { ProductsModule } from './products/products.module';
+import { InventoryModule } from './inventory/inventory.module';
 
 @Module({
   imports: [
@@ -42,6 +43,7 @@ import { ProductsModule } from './products/products.module';
     ServicesModule,
     BlogsModule,
     ProductsModule,
+    InventoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],
