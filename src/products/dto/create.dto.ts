@@ -1,6 +1,7 @@
 import { Type } from 'class-transformer';
 import {
   IsArray,
+  IsBoolean,
   IsNumber,
   IsOptional,
   IsString,
@@ -74,12 +75,21 @@ export class RelatedBlogsDto {
 export class ImagesDto {
   @IsUUID()
   imageId: string;
+
+  @IsString()
+  alt: string;
 }
 
 export class CreateDto {
   @IsString()
   @IsOptional()
   submiter: string;
+
+  @IsString()
+  slug: string;
+
+  @IsBoolean()
+  inStock: boolean;
 
   @IsString()
   name: string;
