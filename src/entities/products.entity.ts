@@ -15,6 +15,12 @@ export class ProductsEntity {
   submiter: string;
 
   @Column()
+  slug: string;
+
+  @Column()
+  inStock: boolean;
+
+  @Column()
   name: string;
 
   @Column()
@@ -82,6 +88,7 @@ export class ProductsEntity {
   @Column({ type: 'jsonb', nullable: true })
   images: Array<{
     imageId: string;
+    alt: string;
   }>;
 
   @CreateDateColumn()
