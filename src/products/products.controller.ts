@@ -30,6 +30,11 @@ export class ProductsController {
     return await this.productsService.getAll();
   }
 
+  @Post('/slug')
+  async findBySlug(@Body() body: { slug: string }) {
+    return await this.productsService.findBySlug(body.slug);
+  }
+
   @Get(':id')
   async findById(@Param('id') id: string) {
     return await this.productsService.findById(id);
