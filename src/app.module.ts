@@ -22,6 +22,7 @@ import { ServicesModule } from './services/services.module';
 import { BlogsModule } from './blogs/blogs.module';
 import { ProductsModule } from './products/products.module';
 import { InventoryModule } from './inventory/inventory.module';
+import { UsersDataModule } from './users-data/users-data.module';
 
 @Module({
   imports: [
@@ -44,6 +45,7 @@ import { InventoryModule } from './inventory/inventory.module';
     BlogsModule,
     ProductsModule,
     InventoryModule,
+    UsersDataModule,
   ],
   controllers: [AppController],
   providers: [AppService],
