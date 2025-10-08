@@ -18,14 +18,6 @@ import { CreateDto, InvenotryProductsCreateDto } from './dto/create.dto';
 import { UpdateDto } from './dto/update.dto';
 import { InventoryService } from './inventory.service';
 
-// interface IInventory {
-//   name: string;
-//   address: string;
-//   postalCode: string;
-//   size: number;
-//   quantity: number;
-// }
-
 @Controller('inventory')
 export class InventoryController {
   constructor(
@@ -91,6 +83,13 @@ export class InventoryController {
   ) {
     const admin = await this.adminService.findAdminById(req.user.id);
     if (!admin) throw new UnauthorizedException('Unauthorized access');
+    const targetInventory = await this.inventoryService.findById(
+      body.inventoryId,
+    );
+    if (!targetInventory)
+      throw new NotFoundException(
+        `Inventory with id ${body.inventoryId} not found`,
+      );
     return await this.inventoryService.getInventoryProducts(body);
   }
 
