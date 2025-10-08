@@ -1,5 +1,6 @@
 import {
   Body,
+  ConflictException,
   Controller,
   Delete,
   Get,
@@ -16,6 +17,14 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth/jwt-auth.guard';
 import { CreateDto, InvenotryProductsCreateDto } from './dto/create.dto';
 import { UpdateDto } from './dto/update.dto';
 import { InventoryService } from './inventory.service';
+
+// interface IInventory {
+//   name: string;
+//   address: string;
+//   postalCode: string;
+//   size: number;
+//   quantity: number;
+// }
 
 @Controller('inventory')
 export class InventoryController {
@@ -93,7 +102,21 @@ export class InventoryController {
   ) {
     const admin = await this.adminService.findAdminById(req.user.id);
     if (!admin) throw new UnauthorizedException('Unauthorized access');
-    return await this.inventoryService.addProductToInventory(body);
+    const targetInventory: any = await this.inventoryService.findById(
+      body.inventoryId,
+    );
+    if (!targetInventory)
+      throw new NotFoundException(
+        `Inventory with id ${body.inventoryId} not found`,
+      );
+
+    if (targetInventory) {
+      if (targetInventory?.size === targetInventory.quantity) {
+        throw new ConflictException('Inventory is full');
+      } else {
+        return await this.inventoryService.addProductToInventory(body);
+      }
+    }
   }
 
   @UseGuards(JwtAuthGuard)

@@ -25,7 +25,7 @@ export class InventoryService {
   }
 
   async findById(id: string) {
-    return await this.invenotryProductsRepository.find({
+    return await this.invenotryRepository.find({
       where: {
         id,
       },
