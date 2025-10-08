@@ -24,6 +24,14 @@ export class InventoryService {
     return await this.invenotryRepository.save(item);
   }
 
+  async findById(id: string) {
+    return await this.invenotryProductsRepository.find({
+      where: {
+        id,
+      },
+    });
+  }
+
   async update(id: string, body: UpdateDto) {
     return await this.invenotryRepository.update(id, body);
   }
@@ -32,11 +40,10 @@ export class InventoryService {
     await this.invenotryRepository.delete(id);
   }
 
-  async getInventoryProducts(body: { inventoryId: string; productId: string }) {
+  async getInventoryProducts(body: { inventoryId: string }) {
     return await this.invenotryProductsRepository.find({
       where: {
         inventoryId: body.inventoryId,
-        productId: body.productId,
       },
     });
   }
