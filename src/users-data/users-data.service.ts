@@ -24,6 +24,12 @@ export class UsersDataService {
   }
 
   async updateUserData(body: { userId: string; os: string }) {
+    console.log('service', body);
+
     return await this.usersDataRepo.update(body.userId, body);
+  }
+
+  async removeUserData(id: string) {
+    return await this.usersDataRepo.delete(id);
   }
 }

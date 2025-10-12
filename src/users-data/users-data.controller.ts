@@ -30,8 +30,12 @@ export class UsersDataController {
   async saveUserData(@Body() body: { userId: string; os: string }) {
     if (body.userId) {
       const userData = await this.usersDataService.getUserDataById(body.userId);
-      if (userData) return this.usersDataService.updateUserData(body);
-      return await this.usersDataService.saveUserData(body);
+      if (userData) {
+        await this.usersDataService.removeUserData(userData.id);
+        return await this.usersDataService.saveUserData(body);
+      } else {
+        return await this.usersDataService.saveUserData(body);
+      }
     } else {
       return await this.usersDataService.saveUserData(body);
     }

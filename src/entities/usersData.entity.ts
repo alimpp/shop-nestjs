@@ -8,6 +8,9 @@ import {
 @Entity()
 export class UsersDataEntity {
   @PrimaryGeneratedColumn('uuid')
+  id: string;
+
+  @Column({ default: '' })
   userId: string;
 
   @Column()
