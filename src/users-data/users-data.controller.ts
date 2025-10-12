@@ -26,6 +26,27 @@ export class UsersDataController {
     return await this.usersDataService.getAllUsersData();
   }
 
+  @UseGuards(JwtAuthGuard)
+  @Post('/user/data')
+  async getUserData(@Body() body: { userId: string }, @Request() req) {
+    const admin = await this.adminService.findAdminById(req.user.id);
+    if (!admin) throw new UnauthorizedException('Unauthorized access');
+    const result = await this.usersDataService.getUserDataById(body.userId);
+    if (result) {
+      return {
+        data: result,
+        message: null,
+        error: null,
+      };
+    } else {
+      return {
+        data: null,
+        message: 'No Data',
+        error: 'This user not data in data base',
+      };
+    }
+  }
+
   @Post('/save/user/data')
   async saveUserData(@Body() body: { userId: string; os: string }) {
     if (body.userId) {
