@@ -74,10 +74,7 @@ export class CategoryController {
       submiter: req.user.id,
       content: `Category ${newCategory.name} created`,
     });
-    return newCategory;
-  }
-
-  @Patch('/name/:id')
+    return   @Patch('/name/:id')
   @UseGuards(JwtAuthGuard)
   async updateName(
     @Param('id') id: string,
@@ -93,6 +90,31 @@ export class CategoryController {
     await this.categoryService.createHistory({
       submiter: req.user.id,
       content: `Category ${lastCategoryData.name} changed to ${body.name}`,
+    });
+    return {
+      success: true,
+      message: 'Category updated successfully',
+    };
+  }
+
+
+
+  @Patch('/:id')
+  @UseGuards(JwtAuthGuard)
+  async updateName(
+    @Param('id') id: string,
+    @Body() body: UpdateDto,
+    @Request() req,
+  ) {
+    const admin = await this.adminService.findAdminById(req.user.id);
+    if (!admin) throw new UnauthorizedException('Unauthorized access');
+    const lastCategoryData = await this.categoryService.findById(id);
+    if (!lastCategoryData)
+      throw new NotFoundException(`Category with id ${id} not found`);
+    await this.categoryService.update(id, body);
+    await this.categoryService.createHistory({
+      submiter: req.user.id,
+      content: `Category updated`,
     });
     return {
       success: true,
