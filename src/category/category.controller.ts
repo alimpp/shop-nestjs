@@ -101,7 +101,7 @@ export class CategoryController {
 
   @Patch(':id')
   @UseGuards(JwtAuthGuard)
-  async updateName(
+  async update(
     @Param('id') id: string,
     @Body() body: UpdateDto,
     @Request() req,
