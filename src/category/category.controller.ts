@@ -99,7 +99,7 @@ export class CategoryController {
 
 
 
-  @Patch('/:id')
+  @Patch(':id')
   @UseGuards(JwtAuthGuard)
   async updateName(
     @Param('id') id: string,
