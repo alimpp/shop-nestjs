@@ -42,6 +42,31 @@ export class AddressController {
     return await this.addressService.getUserAddress(id);
   }
 
+  @Patch('/set-default/:id')
+  async setDefault(
+    @Param('id') id: string,
+    @Body() updateDto: UpdateDto,
+    @Request() req,
+  ) {
+    const userId = req.user.id;
+
+    const userAddresses = await this.addressService.getUserAddress(userId);
+
+    const existingDefault = userAddresses.find((item) => item.default === true);
+
+    if (existingDefault) {
+      await this.addressService.update(existingDefault.id, { default: false });
+    }
+
+    const updatedAddress = await this.addressService.update(id, updateDto);
+
+    if (!updatedAddress) {
+      throw new NotFoundException(`Address with id ${id} not found`);
+    }
+
+    return updatedAddress;
+  }
+
   @Patch(':id')
   async updateAddress(
     @Param('id') id: string,
