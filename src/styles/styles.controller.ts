@@ -6,30 +6,35 @@ import {
   Param,
   Patch,
   Req,
+  UseGuards,
 } from '@nestjs/common';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth/jwt-auth.guard';
 import { CreateDto } from './dto/create.dto';
 import { UpdateDto } from './dto/update.dto';
 import { StylesService } from './styles.service';
-
 @Controller('styles')
+@UseGuards(JwtAuthGuard)
 export class StylesController {
   constructor(private readonly stylesService: StylesService) {}
 
   @Get('/all')
   async getStyles(@Req() req) {
     const styles = await this.stylesService.findById(req.user.id);
-    if (styles) return styles;
-    const body: CreateDto = {
-      user: req.user.id,
-      theme: 'light',
-      title: 'standard',
-      subTitle: 'standard',
-      descrption: 'standard',
-      text: 'standard',
-      label: 'standard',
-      date: 'standard',
-    };
-    return await this.stylesService.add(body);
+    if (styles) {
+      return styles;
+    } else {
+      const body: CreateDto = {
+        user: req.user.id,
+        theme: 'light',
+        title: 'standard',
+        subTitle: 'standard',
+        descrption: 'standard',
+        text: 'standard',
+        label: 'standard',
+        date: 'standard',
+      };
+      return await this.stylesService.add(body);
+    }
   }
 
   @Patch(':id')

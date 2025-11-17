@@ -12,8 +12,8 @@ export class StylesService {
     private readonly stylesRepository: Repository<StylesEntity>,
   ) {}
 
-  async findById(id: string) {
-    return await this.stylesRepository.findOne({ where: { id } });
+  async findById(user: string) {
+    return await this.stylesRepository.findOne({ where: { user } });
   }
 
   async add(body: CreateDto) {
