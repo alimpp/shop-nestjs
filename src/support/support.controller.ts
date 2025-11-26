@@ -1,20 +1,20 @@
 import {
+  Body,
   Controller,
   Get,
-  Post,
-  Patch,
   Param,
-  Body,
-  UseGuards,
-  Request,
+  Patch,
+  Post,
   Req,
+  Request,
+  UseGuards,
 } from '@nestjs/common';
-import { SupportService } from './support.service';
-import { NotificationService } from 'src/notification/notification.service';
 import { AdminService } from 'src/admin/admin.service';
+import { NotificationService } from 'src/notification/notification.service';
 import { UsersService } from 'src/users/users.service';
-import { SendDto } from './dto/sendMsg.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth/jwt-auth.guard';
+import { SendDto } from './dto/sendMsg.dto';
+import { SupportService } from './support.service';
 
 interface IChat {
   itsMe: boolean;
@@ -30,7 +30,6 @@ interface IChat {
 @Controller('support')
 @UseGuards(JwtAuthGuard)
 export class SupportController {
-  
   constructor(
     private readonly supportService: SupportService,
     private readonly notificationService: NotificationService,
@@ -50,12 +49,27 @@ export class SupportController {
           ...key,
           user: {
             ...user,
-            fullname: user?.fristname ? user?.fristname + ' ' + user?.lastname : ''
+            fullname: user?.fristname
+              ? user?.fristname + ' ' + user?.lastname
+              : '',
           },
         };
         result.push(obj);
       }
       return result;
+    }
+  }
+
+  @Get('/unread-count')
+  async unReadCount(@Req() req) {
+    const admin = await this.adminService.findAdminById(req.user.id);
+    if (admin?.role == 'admin') {
+      let badge: number = 0;
+      const chats = await this.supportService.getChatList();
+      for (let key of chats) {
+        badge += key.badge;
+      }
+      return badge;
     }
   }
 
@@ -66,15 +80,15 @@ export class SupportController {
       (a, b) =>
         new Date(a.created_at).getTime() - new Date(b.created_at).getTime(),
     );
-    let list : IChat[] = []
-    for(let key of sortedList) {
+    let list: IChat[] = [];
+    for (let key of sortedList) {
       const obj: IChat = {
         ...key,
-        itsMe: req.user.id == key.from ? true : false
-      }
-      list.push(obj)
+        itsMe: req.user.id == key.from ? true : false,
+      };
+      list.push(obj);
     }
-    return list
+    return list;
   }
 
   @Post('/send-message')
@@ -93,7 +107,7 @@ export class SupportController {
         lastMessageContent: newMessage.content,
         lastMessageTime: newMessage.created_at,
       });
-      return {...newMessage, itsMe: true}
+      return { ...newMessage, itsMe: true };
     } else {
       const newMsg = {
         ...body,
@@ -106,7 +120,7 @@ export class SupportController {
         lastMessageContent: newMessage.content,
         lastMessageTime: newMessage.created_at,
       });
-      return {...newMessage, itsMe: true}
+      return { ...newMessage, itsMe: true };
     }
   }
 
@@ -125,14 +139,14 @@ export class SupportController {
       seen: false,
     });
     const targetChat = await this.supportService.findChat(body.chatId);
-    if(targetChat) {
+    if (targetChat) {
       await this.supportService.updateChat(targetChat.id, {
         badge: 0,
         lastMessageContent: result.content,
         lastMessageTime: result.created_at,
       });
     }
-    return {...result, itsMe: true}
+    return { ...result, itsMe: true };
   }
 
   @Patch(':id')
@@ -151,5 +165,4 @@ export class SupportController {
       }
     }
   }
-  
 }
