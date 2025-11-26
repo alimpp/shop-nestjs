@@ -34,6 +34,15 @@ export class StylesEntity {
   @Column({ default: 'standard' })
   date: string;
 
+  @Column({ default: 'standard' })
+  breadCrumb: string;
+
+  @Column({ default: 'standard' })
+  sidebarItems: string;
+
+  @Column({ default: 'standard' })
+  divider: string;
+
   @CreateDateColumn({ type: 'timestamp' })
   created_at: Date;
 }

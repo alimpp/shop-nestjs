@@ -32,6 +32,9 @@ export class StylesController {
         text: 'standard',
         label: 'standard',
         date: 'standard',
+        breadCrumb: 'standard',
+        sidebarItems: 'standard',
+        divider: 'standard',
       };
       return await this.stylesService.add(body);
     }

@@ -24,4 +24,13 @@ export class CreateDto {
 
   @IsString()
   date: string;
+
+  @IsString()
+  breadCrumb: string;
+
+  @IsString()
+  divider: string;
+
+  @IsString()
+  sidebarItems: string;
 }
