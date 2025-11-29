@@ -12,6 +12,9 @@ export class CreateDto {
   @IsString()
   imageId: string;
 
+  @IsString()
+  redirect: string;
+
   @IsBoolean()
   active: boolean;
 
