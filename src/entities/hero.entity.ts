@@ -23,6 +23,9 @@ export class HeroEntity {
   descrption: string;
 
   @Column()
+  redirect: string;
+
+  @Column()
   active: boolean;
 
   @CreateDateColumn({ type: 'timestamp' })
