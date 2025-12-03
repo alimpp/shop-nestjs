@@ -44,7 +44,6 @@ export class ProperttyController {
 
   @Get('/all')
   async getAllItems() {
-    await this.properttyService.getAll();
     const properties = await this.properttyService.getAll();
     const result = await Promise.all(
       properties.map(async (property) => {

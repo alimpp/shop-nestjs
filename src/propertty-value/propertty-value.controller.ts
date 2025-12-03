@@ -1,26 +1,28 @@
 import {
-  Controller,
-  Get,
-  Post,
-  Patch,
-  Delete,
-  Param,
   Body,
-  UseGuards,
+  Controller,
+  Delete,
+  Get,
+  NotFoundException,
+  Param,
+  Patch,
+  Post,
   Request,
   UnauthorizedException,
-  NotFoundException,
+  UseGuards,
 } from '@nestjs/common';
-import { ProperttyValueService } from './propertty-value.service';
+import { AdminService } from 'src/admin/admin.service';
+import { ProperttyService } from 'src/propertty/propertty.service';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth/jwt-auth.guard';
 import { CreateDto } from './dto/create.dto';
 import { UpdateDto } from './dto/update.dto';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth/jwt-auth.guard';
-import { AdminService } from 'src/admin/admin.service';
+import { ProperttyValueService } from './propertty-value.service';
 
 @Controller('propertty-value')
 @UseGuards(JwtAuthGuard)
 export class ProperttyValueController {
   constructor(
+    private readonly properttyService: ProperttyService,
     private readonly properttyValueService: ProperttyValueService,
     private readonly adminService: AdminService,
   ) {}
@@ -44,7 +46,23 @@ export class ProperttyValueController {
 
   @Get('/all')
   async getAllItems() {
-    return await this.properttyValueService.getAll();
+    const properties = await this.properttyValueService.getAll();
+    const result = await Promise.all(
+      properties.map(async (propertyValue) => {
+        const submiter = await this.adminService.findAdminById(
+          propertyValue.submiter,
+        );
+        const property = await this.properttyService.findById(
+          propertyValue.properttyId,
+        );
+        return {
+          ...propertyValue,
+          properttyId: property ? property : '',
+          submiter: submiter?.username || '',
+        };
+      }),
+    );
+    return result;
   }
 
   @Post('/add')
