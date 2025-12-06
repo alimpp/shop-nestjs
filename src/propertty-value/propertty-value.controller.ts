@@ -45,8 +45,22 @@ export class ProperttyValueController {
   }
 
   @Get('/all')
-  async getAllItems() {
-    return await this.properttyValueService.getAll();
+      async getAllItems() {
+    const properties = await this.properttyValueService.getAll();
+    const result = await Promise.all(
+      properties.map(async (property) => {
+        const submiter = await this.adminService.findAdminById(
+          property.submiter,
+        );
+        return {
+          id: property.id,
+          name: property.name,
+          created_at: property.created_at,
+          submiter: submiter?.username || '',
+        };
+      }),
+    );
+    return result;
   }
 
   @Post('/add')
