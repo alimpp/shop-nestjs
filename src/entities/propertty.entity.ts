@@ -1,11 +1,13 @@
+// propertty.entity.ts
 import {
   Column,
-  Entity,
-  PrimaryGeneratedColumn,
   CreateDateColumn,
+  Entity,
   OneToMany,
+  PrimaryGeneratedColumn,
 } from 'typeorm';
 import { ProperttyValueEntity } from './properttyValue.entity';
+
 @Entity()
 export class ProperttyEntity {
   @PrimaryGeneratedColumn('uuid')
@@ -20,6 +22,9 @@ export class ProperttyEntity {
   @CreateDateColumn({ type: 'timestamp' })
   created_at: Date;
 
-  @OneToMany(() => ProperttyValueEntity, (propertty) => propertty.propertty)
-  properttyValue: ProperttyValueEntity;
+  @OneToMany(
+    () => ProperttyValueEntity,
+    (properttyValue) => properttyValue.property,
+  )
+  properttyValues: ProperttyValueEntity[];
 }
