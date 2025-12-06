@@ -1,10 +1,10 @@
 import {
   Column,
-  Entity,
-  PrimaryGeneratedColumn,
   CreateDateColumn,
+  Entity,
   JoinColumn,
-  OneToMany,
+  ManyToOne,
+  PrimaryGeneratedColumn,
 } from 'typeorm';
 import { ProperttyEntity } from './propertty.entity';
 
@@ -22,9 +22,9 @@ export class ProperttyValueEntity {
   @CreateDateColumn({ type: 'timestamp' })
   created_at: Date;
 
-  @OneToMany(() => ProperttyEntity, (propertty) => propertty.properttyValue)
-  @JoinColumn()
-  propertty: ProperttyEntity;
+  @ManyToOne(() => ProperttyEntity, (property) => property.properttyValues)
+  @JoinColumn({ name: 'properttyId' })
+  property: ProperttyEntity;
 
   @Column()
   properttyId: string;
