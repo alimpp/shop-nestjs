@@ -1,4 +1,3 @@
-// propertty.entity.ts
 import {
   Column,
   CreateDateColumn,
