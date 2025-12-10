@@ -51,10 +51,29 @@ export class ProperttyController {
           property.submiter,
         );
         return {
-          id: property.id,
+          ...property,
           name: property.name,
           created_at: property.created_at,
-          submiter: submiter?.username || '',
+          submiter: submiter?.username || property.submiter,
+        };
+      }),
+    );
+    return result;
+  }
+
+  @Get('/trash')
+  async getTrashItems() {
+    const properties = await this.properttyService.getAllTrash();
+    const result = await Promise.all(
+      properties.map(async (property) => {
+        const submiter = await this.adminService.findAdminById(
+          property.submiter,
+        );
+        return {
+          ...property,
+          name: property.name,
+          created_at: property.created_at,
+          submiter: submiter?.username || property.submiter,
         };
       }),
     );
@@ -100,6 +119,31 @@ export class ProperttyController {
     return {
       success: true,
       message: 'Propertty updated successfully',
+    };
+  }
+
+  @Patch('/trash/:id')
+  async trash(
+    @Param('id') id: string,
+    @Body() body: UpdateDto,
+    @Request() req,
+  ) {
+    const admin = await this.adminService.findAdminById(req.user.id);
+    if (!admin) throw new UnauthorizedException('Unauthorized access');
+
+    const lastData = await this.properttyService.findById(id);
+    if (!lastData)
+      throw new NotFoundException(`Propertty with id ${id} not found`);
+
+    await this.properttyService.update(id, body);
+    await this.properttyService.createHistory({
+      submiter: req.user.id,
+      content: `Propertty ${lastData.name} move to trash`,
+    });
+
+    return {
+      success: true,
+      message: 'Trash successfully',
     };
   }
 

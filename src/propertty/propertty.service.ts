@@ -19,7 +19,11 @@ export class ProperttyService {
   ) {}
 
   async getAll() {
-    return await this.properttyRepository.find();
+    return await this.properttyRepository.find({ where: { trash: false } });
+  }
+
+  async getAllTrash() {
+    return await this.properttyRepository.find({ where: { trash: true } });
   }
 
   async allHistory() {

@@ -18,6 +18,9 @@ export class ProperttyEntity {
   @Column()
   submiter: string;
 
+  @Column()
+  trash: boolean;
+
   @CreateDateColumn({ type: 'timestamp' })
   created_at: Date;
 
