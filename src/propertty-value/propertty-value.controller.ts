@@ -65,6 +65,27 @@ export class ProperttyValueController {
     return result;
   }
 
+  @Get('/trash')
+  async getTrashItems() {
+    const properties = await this.properttyValueService.getAllTrash();
+    const result = await Promise.all(
+      properties.map(async (propertyValue) => {
+        const submiter = await this.adminService.findAdminById(
+          propertyValue.submiter,
+        );
+        const property = await this.properttyService.findById(
+          propertyValue.properttyId,
+        );
+        return {
+          ...propertyValue,
+          properttyId: property ? property : propertyValue.properttyId,
+          submiter: submiter?.username || propertyValue.submiter,
+        };
+      }),
+    );
+    return result;
+  }
+
   @Post('/add')
   async add(@Body() body: CreateDto, @Request() req) {
     const admin = await this.adminService.findAdminById(req.user.id);
@@ -104,6 +125,31 @@ export class ProperttyValueController {
     return {
       success: true,
       message: 'Propertty Value updated successfully',
+    };
+  }
+
+  @Patch('/trash/:id')
+  async trash(
+    @Param('id') id: string,
+    @Body() body: UpdateDto,
+    @Request() req,
+  ) {
+    const admin = await this.adminService.findAdminById(req.user.id);
+    if (!admin) throw new UnauthorizedException('Unauthorized access');
+
+    const lastData = await this.properttyValueService.findById(id);
+    if (!lastData)
+      throw new NotFoundException(`Propertty with id ${id} not found`);
+
+    await this.properttyValueService.update(id, body);
+    await this.properttyValueService.createHistory({
+      submiter: req.user.id,
+      content: `${lastData.name} move to trash`,
+    });
+
+    return {
+      success: true,
+      message: 'Trash successfully',
     };
   }
 

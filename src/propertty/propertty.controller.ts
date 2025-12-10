@@ -71,8 +71,6 @@ export class ProperttyController {
         );
         return {
           ...property,
-          name: property.name,
-          created_at: property.created_at,
           submiter: submiter?.username || property.submiter,
         };
       }),

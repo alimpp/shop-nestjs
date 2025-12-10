@@ -1,4 +1,4 @@
-import { IsString, Length } from 'class-validator';
+import { IsBoolean, IsString, Length } from 'class-validator';
 
 export class CreateDto {
   @IsString()
@@ -7,4 +7,7 @@ export class CreateDto {
 
   @IsString()
   properttyId: string;
+
+  @IsBoolean()
+  trash: boolean;
 }

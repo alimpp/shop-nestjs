@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProperttyValueEntity } from 'src/entities/properttyValue.entity';
 import { ProperttyValueHistoryEntity } from 'src/entities/properttyValueHistory.entity';
+import { Repository } from 'typeorm';
 
 import { UpdateDto } from './dto/update.dto';
 @Injectable()
@@ -15,7 +15,15 @@ export class ProperttyValueService {
   ) {}
 
   async getAll() {
-    return await this.properttyValueRepository.find();
+    return await this.properttyValueRepository.find({
+      where: { trash: false },
+    });
+  }
+
+  async getAllTrash() {
+    return await this.properttyValueRepository.find({
+      where: { trash: true },
+    });
   }
 
   async allHistory() {
