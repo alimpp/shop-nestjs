@@ -49,6 +49,29 @@ export class CategoryController {
           category.submiter,
         );
         return {
+          ...category,
+          imageId: category.imageId,
+          iconId: category.iconId,
+          id: category.id,
+          name: category.name,
+          created_at: category.created_at,
+          submiter: submiter?.username || '',
+        };
+      }),
+    );
+    return result;
+  }
+
+  @Get('/trash')
+  async getAllTrashCategory() {
+    const categories = await this.categoryService.getAllTrash();
+    const result = await Promise.all(
+      categories.map(async (category) => {
+        const submiter = await this.adminService.findAdminById(
+          category.submiter,
+        );
+        return {
+          ...category,
           imageId: category.imageId,
           iconId: category.iconId,
           id: category.id,
@@ -97,6 +120,25 @@ export class CategoryController {
     return {
       success: true,
       message: 'Category updated successfully',
+    };
+  }
+
+  @Patch('/trash/:id')
+  @UseGuards(JwtAuthGuard)
+  async trash(
+    @Param('id') id: string,
+    @Body() body: UpdateDto,
+    @Request() req,
+  ) {
+    const admin = await this.adminService.findAdminById(req.user.id);
+    if (!admin) throw new UnauthorizedException('Unauthorized access');
+    const lastCategoryData = await this.categoryService.findById(id);
+    if (!lastCategoryData)
+      throw new NotFoundException(`Category with id ${id} not found`);
+    await this.categoryService.update(id, body);
+    return {
+      success: true,
+      message: 'Trash successfully',
     };
   }
 

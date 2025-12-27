@@ -1,47 +1,51 @@
 import { Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CategoryEntity } from 'src/entities/category.entity';
 import { CategoryHistoryEntity } from 'src/entities/categoryHistory.entity';
+import { Repository } from 'typeorm';
 
-import { UpdateDto } from './dto/update.dto'
+import { UpdateDto } from './dto/update.dto';
 
 @Injectable()
 export class CategoryService {
-    constructor(
-      @InjectRepository(CategoryEntity)
-      private readonly categoryRepository: Repository<CategoryEntity>,
-      @InjectRepository(CategoryHistoryEntity)
-      private readonly categoryHistoryRepository: Repository<CategoryHistoryEntity>
-    ) {}
+  constructor(
+    @InjectRepository(CategoryEntity)
+    private readonly categoryRepository: Repository<CategoryEntity>,
+    @InjectRepository(CategoryHistoryEntity)
+    private readonly categoryHistoryRepository: Repository<CategoryHistoryEntity>,
+  ) {}
 
-    async getAll() {
-        return await this.categoryRepository.find()
-    }
+  async getAll() {
+    return await this.categoryRepository.find({ where: { trash: false } });
+  }
 
-    async allHistory() {
-        return await this.categoryHistoryRepository.find()
-    }
+  async getAllTrash() {
+    return await this.categoryRepository.find({ where: { trash: true } });
+  }
 
-    async findById(id: string) {
-        return await this.categoryRepository.findOne({ where: { id } })
-    }
+  async allHistory() {
+    return await this.categoryHistoryRepository.find();
+  }
 
-    async createHistory(body: {submiter: string, content: string}) {
-        const categoryHistory = this.categoryHistoryRepository.create(body)
-        await this.categoryHistoryRepository.save(categoryHistory)
-    }
+  async findById(id: string) {
+    return await this.categoryRepository.findOne({ where: { id } });
+  }
 
-    async add(body: {name: string, submiter: string}) {
-        const category = this.categoryRepository.create(body)
-        return await this.categoryRepository.save(category)
-    }
+  async createHistory(body: { submiter: string; content: string }) {
+    const categoryHistory = this.categoryHistoryRepository.create(body);
+    await this.categoryHistoryRepository.save(categoryHistory);
+  }
 
-    async update(id: string, body: UpdateDto) {
-        return await this.categoryRepository.update(id, body)
-    }
+  async add(body: { name: string; submiter: string }) {
+    const category = this.categoryRepository.create(body);
+    return await this.categoryRepository.save(category);
+  }
 
-    async remove(id: string) {
-        await this.categoryRepository.delete(id)
-    }
+  async update(id: string, body: UpdateDto) {
+    return await this.categoryRepository.update(id, body);
+  }
+
+  async remove(id: string) {
+    await this.categoryRepository.delete(id);
+  }
 }

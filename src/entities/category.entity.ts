@@ -22,6 +22,9 @@ export class CategoryEntity {
   @Column()
   iconId: string;
 
+  @Column()
+  trash: boolean;
+
   @CreateDateColumn({ type: 'timestamp' })
   created_at: Date;
 }
