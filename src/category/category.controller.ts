@@ -19,6 +19,7 @@ import { UpdateDto } from './dto/update.dto';
 
 @Controller('category')
 export class CategoryController {
+  
   constructor(
     private readonly categoryService: CategoryService,
     private readonly adminService: AdminService,
