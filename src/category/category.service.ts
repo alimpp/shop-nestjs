@@ -8,6 +8,7 @@ import { UpdateDto } from './dto/update.dto';
 
 @Injectable()
 export class CategoryService {
+  
   constructor(
     @InjectRepository(CategoryEntity)
     private readonly categoryRepository: Repository<CategoryEntity>,
