@@ -131,6 +131,7 @@ export class BlogsController {
     return await this.blogsService.getAllComment(body.blogId);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post('/add-comment')
   async addComment(
     @Body() body: { blogId: string; comment: string },
