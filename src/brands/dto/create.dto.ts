@@ -6,8 +6,5 @@ export class CreateDto {
   name: string;
 
   @IsString()
-  imageId: string;
-
-  @IsString()
   iconId: string;
 }

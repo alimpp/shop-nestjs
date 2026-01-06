@@ -19,7 +19,6 @@ import { UpdateDto } from './dto/update.dto';
 
 @Controller('category')
 export class CategoryController {
-  
   constructor(
     private readonly categoryService: CategoryService,
     private readonly adminService: AdminService,
@@ -51,7 +50,6 @@ export class CategoryController {
         );
         return {
           ...category,
-          imageId: category.imageId,
           iconId: category.iconId,
           id: category.id,
           name: category.name,
@@ -73,7 +71,6 @@ export class CategoryController {
         );
         return {
           ...category,
-          imageId: category.imageId,
           iconId: category.iconId,
           id: category.id,
           name: category.name,
@@ -159,29 +156,6 @@ export class CategoryController {
     await this.categoryService.createHistory({
       submiter: req.user.id,
       content: `Category ${lastCategoryData.name} changed to ${body.name}`,
-    });
-    return {
-      success: true,
-      message: 'Category updated successfully',
-    };
-  }
-
-  @Patch('/image/:id')
-  @UseGuards(JwtAuthGuard)
-  async updateImage(
-    @Param('id') id: string,
-    @Body() body: UpdateDto,
-    @Request() req,
-  ) {
-    const admin = await this.adminService.findAdminById(req.user.id);
-    if (!admin) throw new UnauthorizedException('Unauthorized access');
-    const lastCategoryData = await this.categoryService.findById(id);
-    if (!lastCategoryData)
-      throw new NotFoundException(`Category with id ${id} not found`);
-    await this.categoryService.update(id, body);
-    await this.categoryService.createHistory({
-      submiter: req.user.id,
-      content: `Category ${lastCategoryData.imageId} changed to ${body.imageId}`,
     });
     return {
       success: true,

@@ -14,9 +14,6 @@ export class BrandsEntity {
   name: string;
 
   @Column()
-  imageId: string;
-
-  @Column()
   iconId: string;
 
   @CreateDateColumn({ type: 'timestamp' })

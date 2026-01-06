@@ -17,9 +17,6 @@ export class CategoryEntity {
   submiter: string;
 
   @Column()
-  imageId: string;
-
-  @Column()
   iconId: string;
 
   @Column()

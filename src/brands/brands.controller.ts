@@ -37,8 +37,8 @@ export class BrandsController {
     return await this.brandsService.add(body);
   }
 
-  @Patch('/name/:id')
-  async updateName(
+  @Patch(':id')
+  async update(
     @Param('id') id: string,
     @Body() body: UpdateDto,
     @Request() req,
@@ -54,8 +54,8 @@ export class BrandsController {
     };
   }
 
-  @Patch('/image/:id')
-  async updateImage(
+  @Patch('/name/:id')
+  async updateName(
     @Param('id') id: string,
     @Body() body: UpdateDto,
     @Request() req,
