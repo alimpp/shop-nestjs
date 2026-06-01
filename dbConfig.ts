@@ -19,6 +19,7 @@ import { ProperttyHistoryEntity } from 'src/entities/properttyHistory.entity';
 import { ProperttyValueEntity } from 'src/entities/properttyValue.entity';
 import { ProperttyValueHistoryEntity } from 'src/entities/properttyValueHistory.entity';
 import { ServicesEntity } from 'src/entities/services.entity';
+import { SettingEntity } from 'src/entities/setting.entity';
 import { SupportEntity } from 'src/entities/support.entity';
 import { UserEntity } from 'src/entities/user.entity';
 
@@ -30,7 +31,7 @@ export const pgConfig: PostgresConnectionOptions = {
   port: 5432,
   username: 'postgres',
   password: 'js68002100',
-  database: 'dynamic_shop', 
+  database: 'dynamic_shop',
   entities: [
     UserEntity,
     File,
@@ -55,6 +56,7 @@ export const pgConfig: PostgresConnectionOptions = {
     ProductsEntity,
     ProductsLikeEntity,
     ProductsCommentEntity,
+    SettingEntity,
   ],
   synchronize: true,
 };
