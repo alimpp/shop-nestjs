@@ -8,23 +8,23 @@ import {
 @Entity()
 export class BannersEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id!: string;
 
   @Column()
-  title: string;
+  title!: string;
 
   @Column()
-  subTitle: string;
+  subTitle!: string;
 
   @Column()
-  descrption: string;
+  descrption!: string;
 
   @Column()
-  imageId: string;
+  imageId!: string;
 
   @Column()
-  link: string;
+  link!: string;
 
   @CreateDateColumn({ type: 'timestamp' })
-  created_at: Date;
+  created_at!: Date;
 }

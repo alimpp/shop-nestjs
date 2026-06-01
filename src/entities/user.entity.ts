@@ -3,23 +3,23 @@ import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn } from 'typeor
 @Entity()
 export class UserEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id!: string;
 
   @Column()
-  fristname: string;
+  fristname!: string;
 
   @Column()
-  lastname: string;
+  lastname!: string;
 
   @Column()
-  email: string;
+  email!: string;
 
   @Column()
-  avatarUrl: string;
+  avatarUrl!: string;
 
   @Column()
-  phone: string;
+  phone!: string;
 
   @CreateDateColumn({ type: 'timestamp' })
-  created_at: Date;
+  created_at!: Date;
 }

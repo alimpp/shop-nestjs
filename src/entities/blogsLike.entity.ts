@@ -8,14 +8,14 @@ import {
 @Entity()
 export class BlogsLikeEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id!: string;
 
   @Column()
-  blogId: string;
+  blogId!: string;
 
   @Column()
-  likedBy: string;
+  likedBy!: string;
 
   @CreateDateColumn({ type: 'timestamp' })
-  created_at: Date;
+  created_at!: Date;
 }

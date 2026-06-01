@@ -11,24 +11,24 @@ import { ProperttyEntity } from './propertty.entity';
 @Entity()
 export class ProperttyValueEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id!: string;
 
   @Column()
-  name: string;
+  name!: string;
 
   @Column()
-  submiter: string;
+  submiter!: string;
 
   @Column()
-  trash: boolean;
+  trash!: boolean;
 
   @CreateDateColumn({ type: 'timestamp' })
-  created_at: Date;
+  created_at!: Date;
 
   @ManyToOne(() => ProperttyEntity, (property) => property.properttyValues)
   @JoinColumn({ name: 'properttyId' })
-  property: ProperttyEntity;
+  property!: ProperttyEntity;
 
   @Column()
-  properttyId: string;
+  properttyId!: string;
 }

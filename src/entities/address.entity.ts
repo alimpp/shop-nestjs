@@ -8,26 +8,26 @@ import {
 @Entity()
 export class AddressEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id!: string;
 
   @Column()
-  name: string;
+  name!: string;
 
   @Column()
-  content: string;
+  content!: string;
 
   @Column()
-  postalCode: string;
+  postalCode!: string;
 
   @Column()
-  userId: string;
+  userId!: string;
 
-  @Column()
-  default: boolean;
+  @Column({ default: false })
+  isDefault!: boolean;
 
-  @Column()
-  pin: boolean;
+  @Column({ default: false })
+  pin!: boolean;
 
   @CreateDateColumn({ type: 'timestamp' })
-  created_at: Date;
+  created_at!: Date;
 }

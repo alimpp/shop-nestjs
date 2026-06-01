@@ -3,14 +3,14 @@ import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn } from 'typeor
 @Entity()
 export class CategoryHistoryEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id!: string;
 
   @CreateDateColumn({ type: 'timestamp' })
-  created_at: Date;
+  created_at!: Date;
 
   @Column()
-  submiter: string
+  submiter!: string
 
   @Column()
-  content: string
+  content!: string
 }

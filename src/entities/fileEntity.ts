@@ -3,23 +3,23 @@ import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 @Entity()
 export class File {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id!: string;
 
   @Column()
-  filename: string;
+  filename!: string;
 
   @Column()
-  originalname: string;
+  originalname!: string;
 
   @Column()
-  mimetype: string;
+  mimetype!: string;
 
   @Column()
-  size: number;
+  size!: number;
 
   @Column()
-  path: string;
+  path!: string;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  createdAt: Date;
+  createdAt!: Date;
 }

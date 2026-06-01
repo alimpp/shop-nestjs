@@ -8,23 +8,23 @@ import {
 @Entity()
 export class SupportEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id!: string;
 
   @CreateDateColumn({ type: 'timestamp' })
-  created_at: Date;
+  created_at!: Date;
 
   @Column()
-  chatId: string;
+  chatId!: string;
 
   @Column()
-  type: string;
+  type!: string;
   
   @Column()
-  seen: Boolean;
+  seen!: Boolean;
 
   @Column()
-  content: string;
+  content!: string;
 
   @Column()
-  from: string;
+  from!: string;
 }

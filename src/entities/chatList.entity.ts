@@ -9,23 +9,23 @@ import {
 @Entity()
 export class ChatListEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id!: string;
 
   @CreateDateColumn({ type: 'timestamp' })
-  created_at: Date;
+  created_at!: Date;
 
   @UpdateDateColumn({ type: 'timestamp' })
-  update_at: Date;
+  update_at!: Date;
 
   @Column()
-  chatId: string;
+  chatId!: string;
 
   @Column()
-  badge: number;
+  badge!: number;
   
   @Column()
-  lastMessageContent: string;
+  lastMessageContent!: string;
 
   @Column()
-  lastMessageTime: Date;
+  lastMessageTime!: Date;
 }

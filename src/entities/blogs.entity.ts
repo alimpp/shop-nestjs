@@ -9,31 +9,31 @@ import {
 @Entity()
 export class BlogsEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id!: string;
 
   @Column()
-  readingTime: number;
+  readingTime!: number;
 
   @Column()
-  like: number;
+  like!: number;
 
   @Column()
-  comment: number;
+  comment!: number;
 
   @Column()
-  title: string;
+  title!: string;
 
   @Column()
-  subTitle: string;
+  subTitle!: string;
 
   @Column()
-  description: string;
+  description!: string;
 
   @Column()
-  image: string;
+  image!: string;
 
   @Column({ type: 'jsonb', nullable: true })
-  sections: Array<{
+  sections!: Array<{
     title: string;
     subTitle: string;
     description: string;
@@ -41,13 +41,13 @@ export class BlogsEntity {
   }>;
 
   @Column({ type: 'jsonb', nullable: true })
-  tags: Array<{
+  tags!: Array<{
     name: string;
   }>;
 
   @CreateDateColumn()
-  createdAt: Date;
+  createdAt!: Date;
 
   @UpdateDateColumn()
-  updatedAt: Date;
+  updatedAt!: Date;
 }

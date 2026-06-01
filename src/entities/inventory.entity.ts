@@ -9,26 +9,26 @@ import {
 @Entity()
 export class InvenotryEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id!: string;
 
   @Column()
-  name: string;
+  name!: string;
 
   @Column()
-  address: string;
+  address!: string;
 
   @Column()
-  postalCode: string;
+  postalCode!: string;
 
   @Column({ default: 0 })
-  size: number;
+  size!: number;
 
   @Column({ default: 0 })
-  quantity: number;
+  quantity!: number;
 
   @CreateDateColumn({ type: 'timestamp' })
-  created_at: Date;
+  created_at!: Date;
 
   @UpdateDateColumn({ type: 'timestamp' })
-  update_at: Date;
+  update_at!: Date;
 }

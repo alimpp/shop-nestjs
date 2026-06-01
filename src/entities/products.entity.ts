@@ -9,49 +9,49 @@ import {
 @Entity()
 export class ProductsEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id!: string;
 
   @Column()
-  submiter: string;
+  submiter!: string;
 
   @Column()
-  slug: string;
+  slug!: string;
 
   @Column()
-  inStock: boolean;
+  inStock!: boolean;
 
   @Column()
-  name: string;
+  name!: string;
 
   @Column()
-  description: string;
+  description!: string;
 
   @Column()
-  price: number;
+  price!: number;
 
   @Column()
-  discount: number;
+  discount!: number;
 
   @Column()
-  priceAfterDiscount: number;
+  priceAfterDiscount!: number;
 
   @Column()
-  likes: number;
+  likes!: number;
 
   @Column()
-  comments: number;
+  comments!: number;
 
   @Column()
-  brand: string;
+  brand!: string;
 
   @Column({ type: 'jsonb', nullable: true })
-  info: Array<{
+  info!: Array<{
     name: string;
     value: string;
   }>;
 
   @Column({ type: 'jsonb', nullable: true })
-  category: Array<{
+  category!: Array<{
     id: string;
     name: string;
     imageId: string;
@@ -59,25 +59,25 @@ export class ProductsEntity {
   }>;
 
   @Column({ type: 'jsonb', nullable: true })
-  property: Array<{
+  property!: Array<{
     id: string;
     name: string;
   }>;
 
   @Column({ type: 'jsonb', nullable: true })
-  property_value: Array<{
+  property_value!: Array<{
     id: string;
     name: string;
     properttyId: string;
   }>;
 
   @Column({ type: 'jsonb', nullable: true })
-  tags: Array<{
+  tags!: Array<{
     name: string;
   }>;
 
   @Column({ type: 'jsonb', nullable: true })
-  relatedBlogs: Array<{
+  relatedBlogs!: Array<{
     blogId: string;
     title: string;
     subTitle: string;
@@ -86,14 +86,14 @@ export class ProductsEntity {
   }>;
 
   @Column({ type: 'jsonb', nullable: true })
-  images: Array<{
+  images!: Array<{
     imageId: string;
     alt: string;
   }>;
 
   @CreateDateColumn()
-  createdAt: Date;
+  createdAt!: Date;
 
   @UpdateDateColumn()
-  updatedAt: Date;
+  updatedAt!: Date;
 }

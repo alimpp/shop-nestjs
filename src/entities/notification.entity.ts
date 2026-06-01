@@ -3,20 +3,20 @@ import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn } from 'typeor
 @Entity()
 export class NotificationEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id!: string;
 
   @Column()
-  to: string;
+  to!: string;
 
   @Column()
-  type: string;
+  type!: string;
 
   @Column()
-  content: string;
+  content!: string;
 
   @Column()
-  seen: boolean;
+  seen!: boolean;
 
   @CreateDateColumn({ type: 'timestamp' })
-  created_at: Date;
+  created_at!: Date;
 }

@@ -8,17 +8,17 @@ import {
 @Entity()
 export class BlogsCommentEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id!: string;
 
   @Column()
-  blogId: string;
+  blogId!: string;
 
   @Column()
-  commentFrom: string;
+  commentFrom!: string;
 
   @Column()
-  comment: string;
+  comment!: string;
 
   @CreateDateColumn({ type: 'timestamp' })
-  created_at: Date;
+  created_at!: Date;
 }
