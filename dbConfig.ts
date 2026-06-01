@@ -25,9 +25,12 @@ import { UserEntity } from 'src/entities/user.entity';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 
 export const pgConfig: PostgresConnectionOptions = {
-  url: 'postgresql://neondb_owner:npg_IvGm9ogrFiX7@ep-crimson-math-ad1sgzdi-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=requires',
   type: 'postgres',
-  port: 3306,
+  host: 'localhost',
+  port: 5432,
+  username: 'postgres',
+  password: 'js68002100',
+  database: 'dynamic_shop', 
   entities: [
     UserEntity,
     File,
@@ -53,7 +56,5 @@ export const pgConfig: PostgresConnectionOptions = {
     ProductsLikeEntity,
     ProductsCommentEntity,
   ],
-
-  // ** synchronize in development mode should be true and in production mode should be false ** //
   synchronize: true,
 };
