@@ -19,10 +19,9 @@ import { ProperttyHistoryEntity } from 'src/entities/properttyHistory.entity';
 import { ProperttyValueEntity } from 'src/entities/properttyValue.entity';
 import { ProperttyValueHistoryEntity } from 'src/entities/properttyValueHistory.entity';
 import { ServicesEntity } from 'src/entities/services.entity';
-import { StylesEntity } from 'src/entities/styles.entity';
 import { SupportEntity } from 'src/entities/support.entity';
 import { UserEntity } from 'src/entities/user.entity';
-import { UsersDataEntity } from 'src/entities/usersData.entity';
+
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 
 export const pgConfig: PostgresConnectionOptions = {
@@ -53,8 +52,6 @@ export const pgConfig: PostgresConnectionOptions = {
     ProductsEntity,
     ProductsLikeEntity,
     ProductsCommentEntity,
-    UsersDataEntity,
-    StylesEntity,
   ],
 
   // ** synchronize in development mode should be true and in production mode should be false ** //
