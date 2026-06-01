@@ -52,7 +52,7 @@ export class AddressController {
 
     const userAddresses = await this.addressService.getUserAddress(userId);
 
-    const existingDefault = userAddresses.find((item) => item.default === true);
+    const existingDefault = userAddresses.find((item) => item.def === true);
 
     if (existingDefault) {
       await this.addressService.update(existingDefault.id, { default: false });

@@ -23,7 +23,7 @@ export class AddressEntity {
   userId!: string;
 
   @Column({ default: false })
-  isDefault!: boolean;
+  def!: boolean;
 
   @Column({ default: false })
   pin!: boolean;
