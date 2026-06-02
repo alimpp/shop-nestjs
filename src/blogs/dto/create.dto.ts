@@ -9,21 +9,21 @@ import {
 
 export class SectionDto {
   @IsString()
-  title: string;
+  title!: string;
 
   @IsString()
-  subTitle: string;
+  subTitle!: string;
 
   @IsString()
-  description: string;
+  description!: string;
 
   @IsString()
-  image: string;
+  image!: string;
 }
 
 export class TagDto {
   @IsString()
-  name: string;
+  name!: string;
 }
 
 export class CreateDto {

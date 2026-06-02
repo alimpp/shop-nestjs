@@ -9,5 +9,17 @@ export class SettingEntity {
   background!: string;
 
   @Column()
+  color!: string;
+
+  @Column()
   lang!: string;
+
+  @Column({ type: 'jsonb', nullable: true })
+  button!: Array<{
+    type: string;
+    radius: string;
+    background: string;
+    color: string;
+    border: string;
+  }>;
 }
