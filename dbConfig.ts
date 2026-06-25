@@ -1,4 +1,3 @@
-import { AddressEntity } from 'src/entities/address.entity';
 import { AdminEntity } from 'src/entities/admin.entity';
 import { File } from 'src/entities/fileEntity';
 import { UserEntity } from 'src/entities/user.entity';
@@ -12,6 +11,6 @@ export const pgConfig: PostgresConnectionOptions = {
   username: 'postgres',
   password: 'js68002100',
   database: 'dynamic_shop',
-  entities: [UserEntity, File, AdminEntity, AddressEntity],
+  entities: [UserEntity, File, AdminEntity],
   synchronize: true,
 };
