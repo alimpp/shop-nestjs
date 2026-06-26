@@ -42,6 +42,7 @@
     "pg": "^8.14.1",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
+    "slugify": "^1.6.9",
     "speakeasy": "^2.0.0"
   },
   "devDependencies": {

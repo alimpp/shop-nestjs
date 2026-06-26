@@ -1,28 +1,15 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { pgConfig } from 'dbConfig';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 
-import { AuthModule } from './auth/auth.module';
-import { FileModule } from './file/file.module';
-import { UsersModule } from './users/users.module';
-import { OtpModule } from './otp/otp.module';
 import { AdminModule } from './admin/admin.module';
-import { AddressModule } from './address/address.module';
-import { CategoryModule } from './category/category.module';
-import { ProperttyModule } from './propertty/propertty.module';
-import { ProperttyValueModule } from './propertty-value/propertty-value.module';
-import { SupportModule } from './support/support.module';
-import { NotificationModule } from './notification/notification.module';
-import { HeroModule } from './hero/hero.module';
-import { BrandsModule } from './brands/brands.module';
-import { BannersModule } from './banners/banners.module';
-import { ServicesModule } from './services/services.module';
-import { BlogsModule } from './blogs/blogs.module';
-import { ProductsModule } from './products/products.module';
-import { InventoryModule } from './inventory/inventory.module';
-import { SettingModule } from './setting/setting.module';
+import { AuthModule } from './auth/auth.module';
+import { CategoriesModule } from './categories/categories.module';
+import { FileModule } from './file/file.module';
+import { OtpModule } from './otp/otp.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -32,20 +19,7 @@ import { SettingModule } from './setting/setting.module';
     TypeOrmModule.forRoot(pgConfig),
     OtpModule,
     AdminModule,
-    AddressModule,
-    CategoryModule,
-    ProperttyModule,
-    ProperttyValueModule,
-    SupportModule,
-    NotificationModule,
-    HeroModule,
-    BrandsModule,
-    BannersModule,
-    ServicesModule,
-    BlogsModule,
-    ProductsModule,
-    InventoryModule,
-    SettingModule,
+    CategoriesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

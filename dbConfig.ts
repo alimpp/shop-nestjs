@@ -1,7 +1,7 @@
 import { AdminEntity } from 'src/entities/admin.entity';
+import { Category } from 'src/entities/categories.entity';
 import { File } from 'src/entities/fileEntity';
 import { UserEntity } from 'src/entities/user.entity';
-
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 
 export const pgConfig: PostgresConnectionOptions = {
@@ -11,6 +11,6 @@ export const pgConfig: PostgresConnectionOptions = {
   username: 'postgres',
   password: 'js68002100',
   database: 'dynamic_shop',
-  entities: [UserEntity, File, AdminEntity],
+  entities: [UserEntity, File, AdminEntity, Category],
   synchronize: true,
 };
