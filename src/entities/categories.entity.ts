@@ -4,15 +4,16 @@ import {
   Entity,
   Index,
   JoinColumn,
-  ManyToOne,
-  OneToMany,
   PrimaryGeneratedColumn,
+  Tree,
+  TreeChildren,
+  TreeParent,
   UpdateDateColumn,
 } from 'typeorm';
 
 @Entity('categories')
+@Tree('closure-table')
 @Index(['slug'], { unique: true })
-@Index(['parentId'])
 @Index(['isActive'])
 export class Category {
   @PrimaryGeneratedColumn('uuid')
@@ -54,16 +55,11 @@ export class Category {
   })
   parentId?: string;
 
-  @ManyToOne(() => Category, (category) => category.children, {
-    nullable: true,
-    onDelete: 'SET NULL',
-  })
-  @JoinColumn({
-    name: 'parentId',
-  })
+  @TreeParent({ onDelete: 'SET NULL' })
+  @JoinColumn({ name: 'parentId' })
   parent?: Category | null;
 
-  @OneToMany(() => Category, (category) => category.parent)
+  @TreeChildren()
   children!: Category[];
 
   @CreateDateColumn()
