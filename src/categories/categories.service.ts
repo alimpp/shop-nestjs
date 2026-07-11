@@ -4,11 +4,11 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectDataSource, InjectRepository } from '@nestjs/typeorm';
-import { DataSource, Repository, TreeRepository } from 'typeorm';
 import slugify from 'slugify';
-import { Category } from '../entities/categories.entity';
+import { DataSource, Repository, TreeRepository } from 'typeorm';
 import { CreateCategoryDto } from './dto/create.dto';
 import { UpdateCategoryDto } from './dto/update.dto';
+import { Category } from './entities/categories.entity';
 
 @Injectable()
 export class CategoriesService {

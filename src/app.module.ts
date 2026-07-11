@@ -9,6 +9,7 @@ import { AuthModule } from './auth/auth.module';
 import { CategoriesModule } from './categories/categories.module';
 import { FileModule } from './file/file.module';
 import { OtpModule } from './otp/otp.module';
+import { ProductModule } from './product/product.module';
 import { UsersModule } from './users/users.module';
 
 @Module({
@@ -16,10 +17,11 @@ import { UsersModule } from './users/users.module';
     UsersModule,
     AuthModule,
     FileModule,
-    TypeOrmModule.forRoot(pgConfig),
     OtpModule,
     AdminModule,
     CategoriesModule,
+    ProductModule,
+    TypeOrmModule.forRoot(pgConfig),
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,5 +1,5 @@
+import { Category } from 'src/categories/entities/categories.entity';
 import { AdminEntity } from 'src/entities/admin.entity';
-import { Category } from 'src/entities/categories.entity';
 import { File } from 'src/entities/fileEntity';
 import { UserEntity } from 'src/entities/user.entity';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
