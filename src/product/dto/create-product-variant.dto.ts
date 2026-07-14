@@ -36,6 +36,11 @@ export class CreateProductVariantDto {
 
   @IsOptional()
   @IsBoolean()
+  isDefault?: boolean;
+
+
+  @IsOptional()
+  @IsBoolean()
   isActive?: boolean;
 
 

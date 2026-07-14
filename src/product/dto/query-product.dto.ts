@@ -1,10 +1,13 @@
 import {
     IsBoolean,
     IsEnum,
+    IsIn,
     IsNumber,
     IsOptional,
     IsString,
     IsUUID,
+    Max,
+    Min,
 } from 'class-validator';
 
 import { Type } from 'class-transformer';
@@ -70,6 +73,7 @@ export class QueryProductDto {
   @IsOptional()
   @Type(() => Number)
   @IsNumber()
+  @Min(1)
   page?: number = 1;
 
 
@@ -77,18 +81,30 @@ export class QueryProductDto {
   @IsOptional()
   @Type(() => Number)
   @IsNumber()
+  @Min(1)
+  @Max(100)
   limit?: number = 20;
 
 
 
   @IsOptional()
   @IsString()
+  @IsIn([
+    'createdAt',
+    'updatedAt',
+    'name',
+    'price',
+    'status',
+    'stock',
+    'soldCount',
+    'viewCount',
+  ])
   sortBy?: string;
 
 
 
   @IsOptional()
-  @IsString()
+  @IsIn(['ASC', 'DESC'])
   sortOrder?: 'ASC' | 'DESC';
 
 }

@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
+import { Category } from '../categories/entities/categories.entity';
 import { ProductController } from './product.controller';
 import { ProductService } from './product.service';
 
@@ -21,6 +22,7 @@ import { Brand } from './entities/brand.entity';
       ProductVariantValue,
       ProductTag,
       Brand,
+      Category,
     ]),
   ],
 

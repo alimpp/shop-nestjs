@@ -1,4 +1,6 @@
 import {
+    ArrayMaxSize,
+    IsArray,
     IsBoolean,
     IsEnum,
     IsNumber,
@@ -8,8 +10,13 @@ import {
     Length,
     MaxLength,
     Min,
+    ValidateNested,
 } from 'class-validator';
 
+import { Type } from 'class-transformer';
+
+import { CreateProductMediaDto } from './create-product-media.dto';
+import { CreateProductVariantDto } from './create-product-variant.dto';
 import { ProductStatus } from '../enums/product-status.enum';
 import { ProductVisibility } from '../enums/product-visibility.enum';
 
@@ -158,4 +165,18 @@ export class CreateProductDto {
   @IsOptional()
   @IsString()
   ogImage?: string;
+
+  @IsOptional()
+  @IsArray()
+  @ArrayMaxSize(20)
+  @ValidateNested({ each: true })
+  @Type(() => CreateProductMediaDto)
+  medias?: CreateProductMediaDto[];
+
+  @IsOptional()
+  @IsArray()
+  @ArrayMaxSize(100)
+  @ValidateNested({ each: true })
+  @Type(() => CreateProductVariantDto)
+  variants?: CreateProductVariantDto[];
 }

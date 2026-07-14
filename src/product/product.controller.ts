@@ -14,11 +14,10 @@ import {
 
 import { ProductService } from './product.service';
 
+import { ChangeProductStatusDto } from './dto/change-product-status.dto';
 import { CreateProductDto } from './dto/create-product.dto';
 import { QueryProductDto } from './dto/query-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-
-import { ProductStatus } from './enums/product-status.enum';
 
 
 @Controller('products')
@@ -203,15 +202,14 @@ export class ProductController {
     )
     id: string,
 
-
-    @Body('status')
-    status: ProductStatus,
+    @Body()
+    dto: ChangeProductStatusDto,
 
   ) {
 
     return await this.productService.changeStatus(
       id,
-      status,
+      dto.status,
     );
 
   }
